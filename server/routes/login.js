@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const url = require('url');
-const domain = 'https://react-boilerplate-login.herokuapp.com';
+const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://react-boilerplate-login.herokuapp.com';
 // Login Page
 router.get('/', (req, res) => {
   res.render('login');
