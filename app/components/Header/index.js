@@ -10,7 +10,6 @@ import messages from './messages';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    console.log("hello RENDER");
     return (
       <div>
         <A href="https://twitter.com/mxstbr">
