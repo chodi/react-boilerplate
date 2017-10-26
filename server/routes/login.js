@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const url = require('url');
-
+const domain = 'https://react-boilerplate-login.herokuapp.com';
 // Login Page
 router.get('/', (req, res) => {
   res.render('login');
@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
   const email = encodeURIComponent(req.body.email);
   const password = encodeURIComponent(req.body.password);
   const formData = `email=${email}&password=${password}`;
-  fetch('http://localhost:3000/auth/login', {
+  fetch(`${domain}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
