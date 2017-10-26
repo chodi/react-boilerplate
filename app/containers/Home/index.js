@@ -6,8 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -25,29 +23,16 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     this.props.handleOnclick();
   }
   render() {
-    const { loading, error, repos } = this.props;
     return (
       <article>
-          <title>WElcom to REact Page</title>
-        <div>
-          <button onClick={this.handleOnclick}>LOGOUT</button>
-        </div>
+        <title>WEelcome to React Page</title>
       </article>
     );
   }
 }
 
 LoginPage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-  ]),
   handleOnclick: PropTypes.func,
-  repos: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
 };
 
 export function mapDispatchToProps(dispatch) {

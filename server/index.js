@@ -51,7 +51,7 @@ app.set('views', 'views');
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+app.use('/', authCheckMiddleware);
 
 // routes
 const index = require('./routes');

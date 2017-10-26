@@ -3,17 +3,17 @@ const router = express.Router();
 
 // Lougout Page
 router.get('/', (req, res) => {
-  console.log("get res.cookie.userToken", res.cookie);
-  res.clearCookie('userToken');
-  console.log("get res.cookie.userToken", res.cookie);
-  res.sendStatus(200).end();
+  req.logout();
+  res.cookie('userToken', '', { expires: 0 });
+  res.clearCookie();
+  res.redirect('/login');
 });
 
 router.post('/', (req, res) => {
-  console.log("post res.cookie.userToken", res.cookie);
-  res.clearCookie('userToken');
-  console.log("post res.cookie.userToken", res.cookie);
-  res.sendStatus(200).end();
+  req.logout();
+  res.cookie('userToken', '', { expires: 0 });
+  res.clearCookie();
+  res.redirect('/login');
 });
 
 module.exports = router;

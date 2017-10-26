@@ -7,7 +7,6 @@ const User = require('mongoose').model('User');
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
-  console.log("Checker middlewa", req.url)
   if(req.url === '/logout') {
     return next();
   }

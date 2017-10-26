@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
-const url = require('url');
 const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://react-boilerplate-login.herokuapp.com';
+
 // Login Page
 router.get('/', (req, res) => {
   res.render('login');
@@ -22,12 +22,9 @@ router.post('/', (req, res) => {
   })
   .then((_res) => _res.json())
   .then((json) => {
-    if (json.status === 200) {
+    if (json.status === 200 && json.token) {
       res.cookie('userToken', json.token, { maxAge: 900000, httpOnly: true });
-      res.redirect(url.format({
-        pathname: '/',
-        query: { status: json.status },
-      }));
+      res.redirect('/');
     } else {
       res.redirect('/login');
     }

@@ -113,7 +113,6 @@ module.exports = (passport) => {
   });
 
   router.post('/login', (req, res, next) => {
-    console.log("post('/login req.user", req.user)
     const validationResult = validateLoginForm(req.body);
     if (!validationResult.success) {
       return res.status(400).json({
