@@ -1,0 +1,7 @@
+<h1>Dashboard</h1>
+<p>Welcome to INDEX page</p>
+{{#if authenticatedUser}}
+  <a href="/logout">Logout</a>
+{{else}}
+  <a href="/login">Login</a>
+{{/if}}
