@@ -13,7 +13,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from 'containers/Home/Loadable';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
+import TODO from 'containers/TODO';
 
 const AppWrapper = styled.div`
   max-width: calc(768px + 16px * 2);
@@ -32,12 +32,12 @@ export default function App() {
         defaultTitle="React.js Boilerplate"
       >
         <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
-      <Header />
-      <Switch>
+      </Helmet>{
+            <Header />
+            }<Switch>
         <Route path="/home" component={Home} />
+        <Route path="/todo" component={TODO} />
       </Switch>
-      <Footer />
     </AppWrapper>
   );
 }
