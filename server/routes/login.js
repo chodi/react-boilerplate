@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
   .then((json) => {
     if (json.status === 200 && json.token) {
       res.cookie('userToken', json.token, { maxAge: 900000, httpOnly: true });
-      res.redirect('/');
+      res.redirect('/home');
     } else {
       res.redirect('/login');
     }
