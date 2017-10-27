@@ -7,7 +7,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 // connect to the database and load models
 require('./models').connect();
-const User = require('mongoose').model('User');
+// const User = require('mongoose').model('User');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -33,15 +33,15 @@ passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
 // pass the passport middleware
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id, (err, user) => {
+//     done(err, user);
+//   });
+// });
 
 // View engine
 app.engine('handlebars', exphbs(/*{ defaultLayout: 'main' }*/));
