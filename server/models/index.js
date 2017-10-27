@@ -7,7 +7,6 @@ const DBpass = DBCRED ? DBCRED.DBCredPass : '';
 const DB_USER = DBuser || process.env.DB_USER;
 const DB_PASSWORD = DBpass || process.env.DB_PASSWORD;
 
-console.log("DBCRED", DBCRED)
 module.exports.connect = () => {
   mongoose.connect(`mongodb://${DB_USER}:${DB_PASSWORD}@ds227555.mlab.com:27555/react-login-test`, { useMongoClient: true });
   // plug in the promise library:

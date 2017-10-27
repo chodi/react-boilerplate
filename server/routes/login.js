@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+
+/*
+* Please Edit the value Of domain if NEEDED
+*
+*/
 const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://react-boilerplate-login.herokuapp.com';
 
+console.warn(" \n***************************************************** \n IF YOU ARE RUNNING THE PROD SCRIPT BUT USING LOCALHOST \n PLEASE SET THE DOMAIN VALUE in:\n", __dirname, "/login\n *****************************************************")
 // Login Page
 router.get('/', (req, res) => {
   res.render('login');
