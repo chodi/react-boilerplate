@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
+// const secet_key = require('../../SECRET');
+const thisisacomplexkeyword = process.env.COMPLEX_HASH_LETTERS;// || secet_key;
 const PassportLocalStrategy = require('passport-local').Strategy;
 
 
@@ -42,7 +44,7 @@ module.exports = new PassportLocalStrategy({
       };
 
       // create a token string
-      const token = jwt.sign(payload, 'thisisacomplexkeyword');
+      const token = jwt.sign(payload, thisisacomplexkeyword);
       const data = {
         name: user.name,
       };
