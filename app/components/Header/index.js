@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 
-const DOMAIN = process.env.DOMAIN || 'http://localhost:3000/logout';
+const DOMAIN = process.env.DOMAIN;// || 'http://localhost:3000';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
