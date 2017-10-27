@@ -104,10 +104,11 @@ module.exports = (passport) => {
           message: 'Could not process the form.',
         });
       }
-      return res.status(200).json({
-        success: true,
-        message: 'Success Message',
-      });
+      // return res.status(200).json({
+      //   success: true,
+      //   message: 'Success Message',
+      // });
+      return res.redirect('/login')
       // return res.redirect('/api');
     })(req, res, next);
   });
