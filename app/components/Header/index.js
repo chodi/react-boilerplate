@@ -5,8 +5,6 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 
-const DOMAIN = process.env.DOMAIN;// || 'http://localhost:3000';
-
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
@@ -18,7 +16,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/home">
             Welcome
           </HeaderLink>
-          <a href={`${DOMAIN}/logout`}>logout</a>
+          <a href="/logout">logout</a>
         </NavBar>
       </div>
     );
