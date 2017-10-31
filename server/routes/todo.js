@@ -58,7 +58,7 @@ router.post('/create-todo/:userId', function(req, res, next) {
     }
   )
   .then(() => {
-    res.redirect('/list');
+    res.redirect('/todo/list');
   })
   .catch((err) => res.send(err))
 });
@@ -76,7 +76,7 @@ router.get('/completed-todo/:ownerId/:todoId', function(req, res, next) {
     }
   )
   .then(() => {
-    res.redirect('/list');
+    res.redirect('/todo/list');
   });
 });
 
@@ -93,7 +93,7 @@ router.get('/not-completed-todo/:ownerId/:todoId', function(req, res, next) {
     }
   )
   .then(() => {
-    res.redirect('/list');
+    res.redirect('/todo/list');
   });
 });
 
@@ -125,7 +125,7 @@ router.post('/update-todo/:todoOwner/:todoId', function(req, res, next) {
     }
   )
   .then(() => {
-    res.redirect('/list');
+    res.redirect('/todo/list');
   });
 });
 
