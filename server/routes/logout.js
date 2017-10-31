@@ -4,15 +4,13 @@ const router = express.Router();
 // Lougout Page
 router.get('/', (req, res) => {
   req.logout();
-  res.cookie('userToken', '', { expires: 0 });
-  res.clearCookie();
+  res.clearCookie('userToken', { path: '/' });
   res.redirect('/login');
 });
 
 router.post('/', (req, res) => {
   req.logout();
-  res.cookie('userToken', '', { expires: 0 });
-  res.clearCookie();
+  res.clearCookie('name', { path: '/' });
   res.redirect('/login');
 });
 

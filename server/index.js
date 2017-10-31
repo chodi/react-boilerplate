@@ -14,6 +14,9 @@ mongoose.Promise = Promise;
 // Model for CRUD RESTIFY
 const Todo = require('./models/todos')(mongoose);
 
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./middleware/auth-check');
+
 const cookieParser = require('cookie-parser');
 const app = express();
 // need cookieParser middleware before we can do anything with cookies
@@ -26,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Required for RESTIFY
 const router = express.Router();
-restify.serve(router, Todo);
+restify.serve(router, Todo, { preMiddleware: authCheckMiddleware });
 app.use(router);
 
 // Express session
@@ -47,8 +50,6 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 
-// pass the authenticaion checker middleware
-const authCheckMiddleware = require('./middleware/auth-check');
 // ********************************************************************
 // IMPORTANT NOTE!!!
 // Uncomment below this line to implement an auth before accessing any routes
