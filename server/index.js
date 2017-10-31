@@ -30,7 +30,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Required for RESTIFY
 const router = express.Router();
 restify.serve(router, Todo, { preMiddleware: authCheckMiddleware });
-app.use(router);
 
 // Express session
 // app.use(session({ secret: 'secrets', resave: true, saveUninitialized: true }))
@@ -70,6 +69,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/todo', todo);
+app.use(router);
 
 const argv = require('./argv');
 const port = require('./port');
