@@ -11,6 +11,10 @@ module.exports = (req, res, next) => {
   if (req.url === '/logout') {
     return next();
   }
+  if (req.url === '/sw.js') {
+    return next();
+  }
+
   if (req.url === '/signup' || req.url === '/auth/signup' || (req.url === '/login' && (req.method === 'POST' || req.method === 'GET')) || (req.url === '/auth/login' && req.method === 'POST')) {
     return next();
   }
