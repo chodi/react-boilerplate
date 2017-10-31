@@ -343,15 +343,11 @@ async@2.1.4:
   dependencies:
     lodash "^4.14.0"
 
-async@^0.9.0:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.9.2.tgz#aea74d5e61c1f899613bf64bda66d4c78f2fd17d"
-
 async@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.1.2, async@^2.1.4, async@^2.1.5, async@^2.3.0:
+async@^2.1.2, async@^2.1.4, async@^2.1.5, async@^2.3.0, async@~2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
@@ -1334,7 +1330,7 @@ bluebird@^3.4.6, bluebird@^3.4.7:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
-bluebird@^3.5.0:
+bluebird@^3.5.0, bluebird@~3.5.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
@@ -2683,6 +2679,10 @@ enquire.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
 
+ensure-array@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ensure-array/-/ensure-array-0.0.5.tgz#355becc382c8eb99d68a49b450ae9e6e81102715"
+
 entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
@@ -3124,6 +3124,25 @@ express-handlebars@^3.0.0:
     object.assign "^4.0.3"
     promise "^7.0.0"
 
+express-restify-mongoose@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/express-restify-mongoose/-/express-restify-mongoose-4.3.0.tgz#08af8ff6fdc95f5451718aa22e64a26340c3d68c"
+  dependencies:
+    async "~2.5.0"
+    bluebird "~3.5.0"
+    ensure-array "0.0.5"
+    is-coordinates "~2.0.0"
+    lodash.clone "~4.5.0"
+    lodash.defaults "~4.2.0"
+    lodash.get "~4.4.2"
+    lodash.has "~4.5.2"
+    lodash.isplainobject "~4.0.6"
+    lodash.map "~4.6.0"
+    mongoose-detective "~0.1.0"
+    moredots "~0.1.0"
+    serialize-error "~2.1.0"
+    weedout "~0.1.0"
+
 express-session@^1.15.6:
   version "1.15.6"
   resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.15.6.tgz#47b4160c88f42ab70fe8a508e31cbff76757ab0a"
@@ -3138,7 +3157,7 @@ express-session@^1.15.6:
     uid-safe "~2.1.5"
     utils-merge "1.0.1"
 
-express@^4.16.2, express@^4.8.3:
+express@^4.16.2:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
@@ -3516,12 +3535,6 @@ function.prototype.name@^1.0.0:
     define-properties "^1.1.2"
     function-bind "^1.1.0"
     is-callable "^1.1.3"
-
-functionize@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/functionize/-/functionize-0.1.1.tgz#dc21371428e5da0f358f24283a0376622bfe601f"
-  dependencies:
-    lodash "^2.4.1"
 
 gauge@~2.7.3:
   version "2.7.4"
@@ -4339,6 +4352,10 @@ is-ci@^1.0.10:
   resolved "https://registry.yarnpkg.com/is-ci/-/is-ci-1.0.10.tgz#f739336b2632365061a9d48270cd56ae3369318e"
   dependencies:
     ci-info "^1.0.0"
+
+is-coordinates@~2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/is-coordinates/-/is-coordinates-2.0.2.tgz#c313bb6ece24ed39b6ad3fdfcf6e8e93ae117370"
 
 is-date-object@^1.0.1:
   version "1.0.1"
@@ -5299,6 +5316,10 @@ lodash.chunk@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.chunk/-/lodash.chunk-4.2.0.tgz#66e5ce1f76ed27b4303d8c6512e8d1216e8106bc"
 
+lodash.clone@~4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clone/-/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
+
 lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
@@ -5307,7 +5328,7 @@ lodash.debounce@^4.0.0, lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
-lodash.defaults@^4.0.1:
+lodash.defaults@^4.0.1, lodash.defaults@~4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
@@ -5336,9 +5357,13 @@ lodash.get@^3.7.0:
     lodash._baseget "^3.0.0"
     lodash._topath "^3.0.0"
 
-lodash.get@^4.4.2:
+lodash.get@^4.4.2, lodash.get@~4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+
+lodash.has@~4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.has/-/lodash.has-4.5.2.tgz#d19f4dc1095058cccbe2b0cdf4ee0fe4aa37c862"
 
 lodash.includes@^4.3.0:
   version "4.3.0"
@@ -5368,7 +5393,7 @@ lodash.isnumber@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
 
-lodash.isplainobject@^4.0.4, lodash.isplainobject@^4.0.6:
+lodash.isplainobject@^4.0.4, lodash.isplainobject@^4.0.6, lodash.isplainobject@~4.0.0, lodash.isplainobject@~4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
 
@@ -5384,7 +5409,7 @@ lodash.keys@^3.0.0, lodash.keys@^3.1.2:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
-lodash.map@^4.4.0:
+lodash.map@^4.4.0, lodash.map@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.map/-/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
 
@@ -5460,10 +5485,6 @@ lodash.uniq@^4.5.0:
 lodash@4.17.4, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.5, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
-
-lodash@^2.4.1:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
 
 log-driver@1.2.5:
   version "1.2.5"
@@ -5738,6 +5759,10 @@ mongodb@2.2.33:
     mongodb-core "2.1.17"
     readable-stream "2.2.7"
 
+mongoose-detective@~0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/mongoose-detective/-/mongoose-detective-0.1.1.tgz#853b05e2fc100c1cfae6d52171f62626de681fce"
+
 mongoose@^4.12.4:
   version "4.12.4"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.12.4.tgz#502a2c037376a6c6356eee89128e75653612127c"
@@ -5754,6 +5779,12 @@ mongoose@^4.12.4:
     muri "1.3.0"
     regexp-clone "0.0.1"
     sliced "1.0.1"
+
+moredots@~0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/moredots/-/moredots-0.1.1.tgz#132713eec40a0cd8c73669757761b1495cfa26df"
+  dependencies:
+    lodash.isplainobject "~4.0.0"
 
 mpath@0.3.0:
   version "0.3.0"
@@ -7735,10 +7766,6 @@ require_optional@~1.0.0:
     resolve-from "^2.0.0"
     semver "^5.1.0"
 
-res-error@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/res-error/-/res-error-0.3.1.tgz#a75056c0692593804466184ccac302da2200ddd3"
-
 reselect@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
@@ -7771,16 +7798,6 @@ resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0, resolve@^1.3.2, resolve@~1.4.0:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.4.0.tgz#a75be01c53da25d934a98ebd0e4c4a7312f92a86"
   dependencies:
     path-parse "^1.0.5"
-
-restifier@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/restifier/-/restifier-0.2.0.tgz#86a2defe92063d7916a5d2fce7d60059d356ec8e"
-  dependencies:
-    async "^0.9.0"
-    express "^4.8.3"
-    functionize "^0.1.1"
-    lodash "^2.4.1"
-    res-error "^0.3.1"
 
 restore-cursor@^1.0.1:
   version "1.0.1"
@@ -7927,6 +7944,10 @@ sentence-case@^1.1.1, sentence-case@^1.1.2:
   resolved "https://registry.yarnpkg.com/sentence-case/-/sentence-case-1.1.3.tgz#8034aafc2145772d3abe1509aa42c9e1042dc139"
   dependencies:
     lower-case "^1.1.1"
+
+serialize-error@~2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
 
 serve-static@1.13.1:
   version "1.13.1"
@@ -8982,6 +9003,10 @@ webpack@^3.8.1:
     watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
+
+weedout@~0.1.0:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/weedout/-/weedout-0.1.3.tgz#cbf2a842c3e65abf7858480de21668d8cf87d300"
 
 whatwg-encoding@^1.0.1:
   version "1.0.1"

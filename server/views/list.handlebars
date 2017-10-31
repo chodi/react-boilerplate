@@ -1,0 +1,49 @@
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/dd.ico">
+
+    <title>Todo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <h4><a href="/todo/list">BACK</a></h4>
+      <h4><a href="/home">BACK TO REACT-Boilerplate</a></h4>
+      <h4>{{userId}}</h4>
+      <form method="post" action="/todo/create-todo/{{userId}}">
+        <div class="form-group">
+          <label>Task to do</label>
+          <input class="form-control" type="text" name="todo" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input class="form-control" type="text" name="description" placeholder="Description">
+        </div>
+        <button class="btn btn-primary" type="submit">ADD Todo</button>
+        <br>
+      </form>
+      <br>
+      <br>
+      <br>
+      <br>
+      {{#each todos}}
+        <li>
+          <a href="/todo/update-todo/{{this._id}}">UPDATE</a> |
+          {{#if this.isCompleted }}
+            <a href="/todo/not-completed-todo/{{this.owner}}/{{this._id}}">NOT DONE</a> |
+            <span>this is DONE</span> |
+          {{else}}
+            <a href="/todo/completed-todo/{{this.owner}}/{{this._id}}">DONE</a> |
+            <span>this is NOT yet DONE</span> |
+          {{/if}}
+          {{this.todo}}
+        </li>
+      {{/each}}
+    </div>
+  </body>

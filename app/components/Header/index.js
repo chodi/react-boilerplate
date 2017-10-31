@@ -16,8 +16,9 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/home">
             Welcome
           </HeaderLink>
+          <span style={{marginRight: '10px'}}><a href="/todo/list">SERVER RENDERED Todo</a></span>
           <HeaderLink to="/todo">
-            TO-DO
+            Static-To Do
           </HeaderLink>
           <a href="/logout">logout</a>
         </NavBar>

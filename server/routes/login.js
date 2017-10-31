@@ -30,6 +30,7 @@ router.post('/', (req, res) => {
   .then((json) => {
     if (json.status === 200 && json.token) {
       res.cookie('userToken', json.token, { maxAge: 900000, httpOnly: true });
+      res.cookie('user', json.user.name, { maxAge: 900000, httpOnly: true });
       res.redirect('/home');
     } else {
       res.redirect('/login');
