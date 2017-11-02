@@ -22,10 +22,10 @@ module.exports = (req, res, next) => {
   if (req.url === '/signup' || req.url === '/auth/signup' || (req.url === '/login' && (req.method === 'POST' || req.method === 'GET')) || (req.url === '/auth/login' && req.method === 'POST')) {
     return next();
   }
+  const tokenExists = req.headers.authorization || req.cookies.userToken;
   console.log('############################')
   console.log('tokenExists', tokenExists)
   console.log('############################')
-  const tokenExists = req.headers.authorization || req.cookies.userToken;
   if (!tokenExists) {
     console.log('############################')
     console.log('ID DONT HAVE TOKEN at url', req.url)
