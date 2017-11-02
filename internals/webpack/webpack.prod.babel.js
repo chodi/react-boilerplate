@@ -17,13 +17,6 @@ module.exports = require('./webpack.base.babel')({
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
-  sassLoaders: ExtractTextPlugin.extract({
-    fallbackLoader: 'style-loader',
-    loader: [
-      'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[hash:base64:5]',
-      'sass-loader',
-    ],
-  }),
   plugins: [
     new ExtractTextPlugin('[name].[contenthash].css'),
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -76,6 +69,13 @@ module.exports = require('./webpack.base.babel')({
       AppCache: false,
     }),
   ],
+  sassLoaders: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [
+      'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[hash:base64:5]',
+      'sass-loader',
+    ],
+  }),
 
   performance: {
     assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
