@@ -14,6 +14,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from 'containers/Home/Loadable';
 import Header from 'components/Header';
 import TODO from 'containers/TODO';
+import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 const AppWrapper = styled.div`
   max-width: calc(768px + 16px * 2);
@@ -37,6 +38,7 @@ export default function App() {
             }<Switch>
         <Route path="/home" component={Home} />
         <Route path="/todo" component={TODO} />
+        <Route path="" component={NotFoundPage} />
       </Switch>
     </AppWrapper>
   );
