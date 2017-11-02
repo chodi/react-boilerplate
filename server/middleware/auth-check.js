@@ -3,7 +3,7 @@ const User = require('mongoose').model('User');
 // const Auth = require('../modules/Auth');
 const isDev = process.env.NODE_ENV !== 'production';
 const secret = isDev ? require('../../SECRET').secretkey : '';
-const thisisacomplexkeyword = isDev ? secret : process.env.COMPLEX_HASH_LETTERS;
+const thisisacomplexkeyword = process.env.COMPLEX_HASH_LETTERS;
 /**
  *  The Auth Checker middleware function.
  */
