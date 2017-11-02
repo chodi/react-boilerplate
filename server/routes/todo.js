@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://react-boilerplate-login.herokuapp.com';
+// const domain = 'http://localhost:3000';
 
 /* GET LIST task page. */
 router.get('/list', (req, res, next) => {
