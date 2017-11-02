@@ -55,6 +55,7 @@ module.exports = require('./webpack.base.babel')({
 
   // Add development plugins
   plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define
+  sassLoaders: 'style-loader!css-loader?modules&importLoaders=2&localIdentName=[local]__[path][name]__[hash:base64:5]!sass-loader?outputStyle=expanded',
 
   // Emit a source map for easier debugging
   // See https://webpack.js.org/configuration/devtool/#devtool

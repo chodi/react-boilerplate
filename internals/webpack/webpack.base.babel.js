@@ -27,6 +27,10 @@ module.exports = (options) => ({
           loader: 'babel-loader',
           options: options.babelQuery,
         },
+      }, {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: options.sassLoaders,
       },
       {
         // Preprocess our own .css files

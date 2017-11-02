@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
@@ -16,8 +17,15 @@ module.exports = require('./webpack.base.babel')({
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
-
+  sassLoaders: ExtractTextPlugin.extract({
+    fallbackLoader: 'style-loader',
+    loader: [
+      'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[hash:base64:5]',
+      'sass-loader',
+    ],
+  }),
   plugins: [
+    new ExtractTextPlugin('[name].[contenthash].css'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -43,7 +51,6 @@ module.exports = require('./webpack.base.babel')({
       },
       inject: true,
     }),
-
     // Put it in the end to capture all the HtmlWebpackPlugin's
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
     new OfflinePlugin({
