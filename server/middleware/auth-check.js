@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   console.log('### IM HERE at auth-check')
   console.log('### URL', req.url)
   console.log('############################')
-  if (req.url === '/logout') {
+  if (req.url === '/logout' || req.url === '/favicon.ico') {
     return next();
   }
   if (req.url === '/sw.js') {
