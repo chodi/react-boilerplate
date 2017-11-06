@@ -57,6 +57,10 @@ export class NavigationList extends React.PureComponent {
                 <Icon type="upload" />
                 <span>NAVIGATION 3</span>
               </MITEM>
+              <MITEM key="NAVIGATION04">
+                <Icon type="video-camera" />
+                <span><a href="/logout">logout</a></span>
+              </MITEM>
             </Menu>
           </Sider>
           <Layout>
