@@ -29,12 +29,13 @@ router.post('/', (req, res) => {
   .then((_res) => _res.json())
   .then((json) => {
     if (json.status === 200 && json.token) {
-      res.cookie('userToken', json.token, { maxAge: 90000000, httpOnly: true });
-      res.cookie('user', json.user.name, { maxAge: 90000000, httpOnly: true });
+      res.cookie('userToken', json.token, { maxAge: 9000, httpOnly: true });
       const user = { name: json.user.name, email: json.user.email, username: json.user.email };
-      res.cookie('user', user, { maxAge: 90000000, httpOnly: true });
+      res.cookie('user', user, { maxAge: 9000, httpOnly: true });
+      console.log("I will be redirected to home")
       res.redirect('/');
     } else {
+      console.log("I will be redirected to Login")
       res.redirect('/login');
     }
   });

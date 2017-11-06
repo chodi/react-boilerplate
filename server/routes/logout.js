@@ -5,12 +5,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
   req.logout();
   res.clearCookie('userToken', { path: '/' });
+  res.clearCookie('user', { path: '/' });
   res.redirect('/login');
 });
 
 router.post('/', (req, res) => {
   req.logout();
-  res.clearCookie('name', { path: '/' });
+  res.clearCookie('userToken', { path: '/' });
+  res.clearCookie('user', { path: '/' });
   res.redirect('/login');
 });
 
