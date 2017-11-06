@@ -28,10 +28,10 @@ import {
  *
  * @return {object}    An action object with a type of GET_CREDENTIAL
  */
-export function getCredentials(name) {
+export function getCredentials(payload) {
   return {
     type: GET_CREDENTIAL,
-    name,
+    payload,
   };
 }
 

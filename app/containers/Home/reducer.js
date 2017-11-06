@@ -29,9 +29,10 @@ function homeReducer(state = initialState, action) {
     case LOGOUT_SUCCESS:
       return state.set(initialState);
     case GET_CREDENTIAL:
-      // Delete prefixed '@' from the github username
       return state
-        .set('username', action.name.replace(/@/gi, ''));
+        .set('name', window.USER.name)
+        .set('email', window.USER.email)
+        .set('username', window.USER.username);
     default:
       return state;
   }
