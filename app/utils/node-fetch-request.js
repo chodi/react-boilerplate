@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export default (url, params) => {
+const getRequest = (url, params) => {
   return fetch(url,
     {
       method: 'GET',
@@ -15,3 +15,23 @@ export default (url, params) => {
   .then((result) => ({ result, error: {} }))
   .catch((error) => ({ result: {}, error }));
 };
+
+const postRequest = (url, params) => {
+  return fetch(url,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    }
+  )
+  .then((result) => {
+    return result.json();
+  })
+  .then((result) => ({ result, error: {} }))
+  .catch((error) => ({ result: {}, error }));
+};
+
+const request = { getRequest, postRequest }
+export default request;
