@@ -6,7 +6,6 @@ export default (url, params) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1OWYyYThlNzAyMWFhZTAwMTgwYTEwZWYiLCJpYXQiOjE1MDk2MDY5MDd9._FTAJRryXJHTzLhsV-6gVmSuKGFMuTrcUwMCdVrHMkE',
       },
     }
   )
@@ -15,4 +14,4 @@ export default (url, params) => {
   })
   .then((result) => ({ result, error: {} }))
   .catch((error) => ({ result: {}, error }));
-}
+};
