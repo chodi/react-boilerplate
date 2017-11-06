@@ -6,7 +6,7 @@ const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' 
 
 /* GET LIST task page. */
 router.get('/list', (req, res, next) => {
-  const userId = req.cookies.user;
+  const userId = req.cookies.user.name;
   fetch(`${domain}/api/v1/Todo?query={"owner":"${userId}"}`,
     {
       method: 'GET',
@@ -26,7 +26,7 @@ router.get('/list', (req, res, next) => {
 /* POST CREATE todo page. */
 router.post('/create-todo/:userId', (req, res, next) => {
   const params = req.body;
-  params.owner = req.cookies.user;
+  params.owner = req.cookies.user.name;
   fetch(`${domain}/api/v1/Todo`,
     {
       method: 'POST',
