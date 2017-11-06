@@ -8,10 +8,6 @@ const thisisacomplexkeyword = isDev ? secret : process.env.COMPLEX_HASH_LETTERS;
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
-  console.log('############################')
-  console.log('### IM HERE at auth-check')
-  console.log('### URL', req.url)
-  console.log('############################')
   if (req.url === '/logout' || req.url === '/favicon.ico') {
     return next();
   }
@@ -23,21 +19,12 @@ module.exports = (req, res, next) => {
     return next();
   }
   const tokenExists = req.headers.authorization || req.cookies.userToken;
-  console.log('############################')
-  console.log('tokenExists', tokenExists)
-  console.log('############################')
   if (!tokenExists) {
-    console.log('############################')
-    console.log('ID DONT HAVE TOKEN at url', req.url)
-    console.log('############################')
     return res.render('login', { message: 'token not exist' });
   }
   const token = req.cookies.userToken || req.headers.authorization.split(' ')[1];
   // decode the token using a secret key-phrase
 
-  console.log('############################')
-  console.log('token ', tokenExists,'@ URL', req.url)
-  console.log('############################')
   return jwt.verify(token, thisisacomplexkeyword, (err, decoded) => {
     // the 401 code is for unauthorized status
     if (err) { return res.status(401).end(); }
