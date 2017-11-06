@@ -9,19 +9,23 @@ import React from 'react';
 import { Input, Button } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTodo } from './actions';
+import { getCredentials } from 'containers/Home/actions';
+import LoadingIndicator from 'components/LoadingIndicator';
+import { getTodo, addTodo } from './actions';
 import mapStateToProps from './selectors';
 
 export class Todo extends React.PureComponent { // eslint-disable-line react
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      inputDescription: '',
+      inputTodo: '',
       todos: props.allTodos || [],
     };
   }
   componentWillMount() {
     this.props.getTodo();
+    this.props.getCredentials();
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.allTodos !== this.props.allTodos) {
@@ -32,24 +36,33 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
     this.setState({ [stateId]: value.target.value });
   }
   onAddTodo = () => {
-    this.state.todos.push(this.state.inputValue);
-    this.setState({ inputValue: '' });
+    const { inputDescription, inputTodo } = this.state;
+    this.props.addTodo({ todo: inputTodo, description: inputDescription });
+    this.setState({ inputDescription: '', inputTodo: '' });
   }
   render() {
-    const { inputValue, todos } = this.state;
+    const { inputDescription, inputTodo, todos } = this.state;
     return (
       <div>
-        <Input onChange={(value) => this.onChangeHandler('inputValue', value)} onPressEnter={this.onAddTodo} placeholder="Add new Task" size="large" value={inputValue} />
-        <Button type="primary" onClick={this.onAddTodo} >Add</Button>
-        <ul>{todos && todos.map((todo) => {
-          return (
-            <li style={{ display: 'flex', flexDirection: 'row' }}>
-              <div>{todo.get('todo')}</div>
-              <Button type="primary" icon="delete" size="small">Completed</Button>
-            </li>
-          );
-        })
-      }</ul>
+        <Input onChange={(value) => this.onChangeHandler('inputTodo', value)} onPressEnter={this.onAddTodo} placeholder="Add new Task" size="large" value={inputTodo} />
+        <Input style={{ marginTop: '20px' }} onChange={(value) => this.onChangeHandler('inputDescription', value)} onPressEnter={this.onAddTodo} placeholder="DESCRIPTION" size="large" value={inputDescription} />
+        <Button style={{ marginTop: '20px', marginBottom: '20px' }} type="primary" onClick={this.onAddTodo} >Add</Button>
+        <div style={{ overflow: 'scroll', height: '300px', backgroundColor: '#f7f7f7' }} >
+          {
+            this.props.isLoading ?
+              <LoadingIndicator /> :
+                <ul>{todos && todos.map((todo) => {
+                  return (
+                    <li style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
+                      <div>{todo.get('todo')}</div>
+                      <div><Button type="primary" icon="delete" size="small">Mark as Completed</Button></div>
+                      <div><Button type="danger" icon="delete" size="small">DELETE</Button></div>
+                    </li>
+                  );
+                })
+              }</ul>
+          }
+        </div>
       </div>
     );
   }
@@ -57,12 +70,17 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
 
 Todo.propTypes = {
   getTodo: PropTypes.func,
+  addTodo: PropTypes.func,
+  getCredentials: PropTypes.func,
   allTodos: PropTypes.any,
+  isLoading: PropTypes.bool,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     getTodo: () => dispatch(getTodo()),
+    addTodo: (payload) => dispatch(addTodo(payload)),
+    getCredentials: () => dispatch(getCredentials()),
   };
 }
 
