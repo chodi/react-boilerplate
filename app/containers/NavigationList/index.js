@@ -1,24 +1,14 @@
-/*
- * Todo Page
- *
- * This is the first thing users see of our App, at the '/' route
- */
-
 import React from 'react';
-// ANTD
 import { Layout, Menu, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { getTodo } from './actions';
-// import mapStateToProps from './selectors';
-
 import TODO from 'containers/TODO';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 
 const { Header, Sider, Content } = Layout;
 const MITEM = Menu.Item;
-export class Sidebar extends React.PureComponent { // eslint-disable-line react
+export class NavigationList extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,9 +79,9 @@ export class Sidebar extends React.PureComponent { // eslint-disable-line react
   }
 }
 
-Sidebar.propTypes = {
+NavigationList.propTypes = {
   getTodo: PropTypes.func,
   allTodos: PropTypes.any,
 };
 
-export default connect()(Sidebar);
+export default connect()(NavigationList);

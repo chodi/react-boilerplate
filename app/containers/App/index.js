@@ -7,14 +7,11 @@
  */
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
-
-import Home from 'containers/Home/Loadable';
-import Header from 'components/Header';
-import TODO from 'containers/TODO';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import NavigationList from 'containers/NavigationList';
 
 const AppWrapper = styled.div`
   max-width: calc(768px + 16px * 2);
@@ -28,16 +25,8 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>{
-            <Header />
-            }<Switch>
-        <Route path="/home" component={Home} />
-        <Route path="/todo" component={TODO} />
+      <Switch>
+        <Route path="/" component={NavigationList} />
         <Route path="" component={NotFoundPage} />
       </Switch>
     </AppWrapper>
