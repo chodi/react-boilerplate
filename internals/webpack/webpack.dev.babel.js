@@ -53,8 +53,12 @@ module.exports = require('./webpack.base.babel')({
     chunkFilename: '[name].chunk.js',
   },
 
+  htmlPluginOptions: {
+    alwaysWriteToDisk: true,
+  },
   // Add development plugins
-  plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define
+  plugins, // eslint-disable-line no-use-before-define
+  // plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define
   sassLoaders: 'style-loader!css-loader?modules&importLoaders=2&localIdentName=[local]__[path][name]__[hash:base64:5]!sass-loader?outputStyle=expanded',
 
   // Emit a source map for easier debugging
