@@ -4,7 +4,8 @@ const router = express.Router();
 // Home Page
 router.get('/', (req, res) => {
   if (req.cookies.userToken) {
-    res.redirect('/home');
+    const user = req.cookies.user;
+    res.render('mainRoute', { user });
   } else {
     res.redirect('/login');
   }
