@@ -6,19 +6,17 @@ const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' 
 
 /* GET LIST task page. */
 router.get('/list', (req, res, next) => {
-  const userId = req.cookies.user
+  const userId = req.cookies.user;
   fetch(`${domain}/api/v1/Todo?query={"owner":"${userId}"}`,
     {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer ' + req.cookies.userToken,
+        authorization: `bearer ${req.cookies.userToken}`,
       },
     }
   )
-  .then((todosResult) => {
-    return todosResult.json();
-  })
+  .then((todosResult) => todosResult.json())
   .then((todos) => {
     res.render('list', { todos, userId });
   })
@@ -26,7 +24,7 @@ router.get('/list', (req, res, next) => {
 });
 
 /* POST CREATE todo page. */
-router.post('/create-todo/:userId', function(req, res, next) {
+router.post('/create-todo/:userId', (req, res, next) => {
   const params = req.body;
   params.owner = req.cookies.user;
   fetch(`${domain}/api/v1/Todo`,
@@ -34,7 +32,7 @@ router.post('/create-todo/:userId', function(req, res, next) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer ' + req.cookies.userToken,
+        authorization: `bearer ${req.cookies.userToken}`,
       },
       body: JSON.stringify(params),
     }
@@ -42,18 +40,18 @@ router.post('/create-todo/:userId', function(req, res, next) {
   .then(() => {
     res.redirect('/todo/list');
   })
-  .catch((err) => res.send(err))
+  .catch((err) => res.send(err));
 });
 
 /* REQUEST Completed Task. */
-router.get('/completed-todo/:ownerId/:todoId', function(req, res, next) {
+router.get('/completed-todo/:ownerId/:todoId', (req, res, next) => {
   const params = { isCompleted: true };
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer ' + req.cookies.userToken,
+        authorization: `bearer ${req.cookies.userToken}`,
       },
       body: JSON.stringify(params),
     }
@@ -64,14 +62,14 @@ router.get('/completed-todo/:ownerId/:todoId', function(req, res, next) {
 });
 
 /* REVERT to NOt-COMPLETED Completed Task. */
-router.get('/not-completed-todo/:ownerId/:todoId', function(req, res, next) {
+router.get('/not-completed-todo/:ownerId/:todoId', (req, res, next) => {
   const params = { isCompleted: false };
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer ' + req.cookies.userToken,
+        authorization: `bearer ${req.cookies.userToken}`,
       },
       body: JSON.stringify(params),
     }
@@ -82,13 +80,13 @@ router.get('/not-completed-todo/:ownerId/:todoId', function(req, res, next) {
 });
 
 /* GET user update page. */
-router.get('/update-todo/:todoId', function(req, res, next) {
+router.get('/update-todo/:todoId', (req, res, next) => {
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer ' + req.cookies.userToken,
+        authorization: `bearer ${req.cookies.userToken}`,
       },
     }
   )
@@ -101,14 +99,14 @@ router.get('/update-todo/:todoId', function(req, res, next) {
 });
 
 /* POST REQUEST todo update page. */
-router.post('/update-todo/:todoOwner/:todoId', function(req, res, next) {
+router.post('/update-todo/:todoOwner/:todoId', (req, res, next) => {
   const params = req.body;
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        authorization: 'bearer ' + req.cookies.userToken,
+        authorization: `bearer ${req.cookies.userToken}`,
       },
       body: JSON.stringify(params),
     }
