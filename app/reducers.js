@@ -9,7 +9,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import loginCredentials from 'containers/Home/reducer';
-import todoReducer from 'containers/TODO/reducer';
+import todoReducer from 'pages/TODO/reducer';
 
 /*
  * routeReducer
