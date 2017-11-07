@@ -8,10 +8,6 @@ const thisisacomplexkeyword = isDev ? secret : process.env.COMPLEX_HASH_LETTERS;
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
-  console.log("@@@@@@@@@@@@@@@@@@@@")
-  console.log("URL", req.url)
-  console.log("@@@@@@@@@@@@@@@@@@@@")
-  console.log("\n")
   if (req.url === '/sw.js') {
     return next();
   }
@@ -24,12 +20,8 @@ module.exports = (req, res, next) => {
     // return next();
   }
   if (!tokenExists) {
-    console.log("############## IM DEAD", req.url)
     return res.render('login', { message: 'token not exist' });
   }
-  console.log("#########################")
-  console.log("IM PASSED 002", req.url)
-  console.log("#########################")
   const token = req.cookies.userToken || req.headers.authorization.split(' ')[1];
   // decode the token using a secret key-phrase
 
@@ -43,9 +35,6 @@ module.exports = (req, res, next) => {
       if (userErr || !user) {
         return res.status(401).end();
       }
-      console.log("#########################")
-      console.log("IM PASSED NEXXT", req.url)
-      console.log("#########################")
       return next();
     });
   });
