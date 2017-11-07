@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Menu, Icon } from 'antd';
 import { connect } from 'react-redux';
-import { redirect, reroute } from 'containers/NavigationList/actions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import styles from './styles.css';
@@ -24,8 +22,7 @@ class SideBar extends React.Component {
     };
   }
   onChangeMenu = ({ key }) => {
-    this.setState({ activeKey: key })
-    // this.props.onReroute(key);
+    this.setState({ activeKey: key });
   }
   toggle = () => {
     this.setState({
@@ -72,17 +69,4 @@ class SideBar extends React.Component {
   }
 }
 
-
-SideBar.propTypes = {
-  onRedirect: PropTypes.func,
-  onReroute: PropTypes.func,
-  selectedNav: PropTypes.string,
-};
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onRedirect: (route) => dispatch(redirect(route)),
-    onReroute: (route) => dispatch(reroute(route)),
-  };
-}
-export default connect(null, mapDispatchToProps)(SideBar);
+export default connect(null)(SideBar);
