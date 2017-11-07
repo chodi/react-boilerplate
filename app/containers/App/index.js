@@ -7,28 +7,45 @@
  */
 
 import React from 'react';
-// import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import NavigationList from 'containers/NavigationList';
+import NotFoundPage from 'pages/NotFoundPage/Loadable';
+import Content from 'containers/Content';
+import Home from 'pages/Home';
+import Settings from 'pages/Settings';
+import TODO from 'pages/TODO';
+import Sidebar from 'containers/Sidebar';
 
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
+const ContentWrapper = styled.div`
+  max-width: calc(100% - 100px);
   min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
+  height: inherit;
+  width: 100%;
+  flex-grow: 1;
+`;
+const AppWrapper = styled.div`
+  max-width: 100%;
+  height: 100vh;
+  min-height: 100%;
+  display: flex !important;
+  flex-direction: row;
 `;
 
 export default function App() {
   return (
     <AppWrapper>
-      <Switch>
-        <Route path="/" component={NavigationList} />
-        <Route path="" component={NotFoundPage} />
-      </Switch>
+      <Sidebar />
+      <ContentWrapper>
+        <Content>
+          <Switch>
+            <Route path="/mytodos" component={TODO} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/dashboard" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="*" component={NotFoundPage} />
+          </Switch>
+        </Content>
+      </ContentWrapper>
     </AppWrapper>
   );
 }
