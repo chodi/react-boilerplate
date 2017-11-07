@@ -12,9 +12,11 @@ import {
 /**
  * Get Todo
  */
+
 export function* getTodoSaga() {
   const username = window.USER.name;
-  const requestURL = `http://localhost:3000/api/v1/Todo?query={"owner":"${username}"}`;
+  const host = window.location.origin;
+  const requestURL = `${host}/api/v1/Todo?query={"owner":"${username}"}`;
   const { result, error } = yield call(request.getRequest, requestURL);
   if (result) {
     yield put(getTodoSuccess(result));
@@ -27,12 +29,13 @@ export function* getTodoSaga() {
  * Add Todo
  */
 export function* addTodoSaga({ payload }) {
-  // Select username from store
+  // Select username from window
   const username = window.USER.name;
   const todoPayload = { owner: username, ...payload };
-  const requestURL = `http://localhost:3000/api/v1/Todo`;
+  const host = window.location.origin;
+  const requestURL = `${host}/api/v1/Todo`;
   try {
-    // Call our request helper (see 'utils/request')
+    // Call our request helper (see 'utils/node-fetch-request')
     const newTodos = yield call(request.postRequest, requestURL, todoPayload);
     yield put(addTodoSuccess(newTodos.result));
   } catch (err) {
