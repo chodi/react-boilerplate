@@ -1,12 +1,11 @@
 import { createSelector } from 'reselect';
-import { getTodosByOwner } from 'data/Todo/selectors';
+import { getTodos } from 'data/Todo/selectors';
 import stateName from './stateName';
 
 const getUiState = (state) => state.get(stateName);
-const getTodoByowner = (state) => getTodosByOwner(state, 'chanerandio');
 
 export default () => createSelector(
-  getUiState, getTodoByowner,
+  getUiState, getTodos,
   (uiState, todoByOwner) => {
     const isLoading = uiState.get('isLoading');
     return {
