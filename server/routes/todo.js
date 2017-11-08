@@ -5,7 +5,7 @@ const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' 
 // const domain = 'http://localhost:3000';
 
 /* GET LIST task page. */
-router.get('/list', (req, res, next) => {
+router.get('/list', (req, res) => {
   const userId = req.cookies.user.name;
   fetch(`${domain}/api/v1/Todo?query={"owner":"${userId}"}`,
     {
@@ -24,7 +24,7 @@ router.get('/list', (req, res, next) => {
 });
 
 /* POST CREATE todo page. */
-router.post('/create-todo/:userId', (req, res, next) => {
+router.post('/create-todo/:userId', (req, res) => {
   const params = req.body;
   params.owner = req.cookies.user.name;
   fetch(`${domain}/api/v1/Todo`,
@@ -44,7 +44,7 @@ router.post('/create-todo/:userId', (req, res, next) => {
 });
 
 /* REQUEST Completed Task. */
-router.get('/completed-todo/:ownerId/:todoId', (req, res, next) => {
+router.get('/completed-todo/:ownerId/:todoId', (req, res) => {
   const params = { isCompleted: true };
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
@@ -62,7 +62,7 @@ router.get('/completed-todo/:ownerId/:todoId', (req, res, next) => {
 });
 
 /* REVERT to NOt-COMPLETED Completed Task. */
-router.get('/not-completed-todo/:ownerId/:todoId', (req, res, next) => {
+router.get('/not-completed-todo/:ownerId/:todoId', (req, res) => {
   const params = { isCompleted: false };
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
@@ -80,7 +80,7 @@ router.get('/not-completed-todo/:ownerId/:todoId', (req, res, next) => {
 });
 
 /* GET user update page. */
-router.get('/update-todo/:todoId', (req, res, next) => {
+router.get('/update-todo/:todoId', (req, res) => {
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
       method: 'GET',
@@ -90,16 +90,14 @@ router.get('/update-todo/:todoId', (req, res, next) => {
       },
     }
   )
-  .then((updatedTodoResult) => {
-    return updatedTodoResult.json();
-  })
+  .then((updatedTodoResult) => updatedTodoResult.json())
   .then((updatedTodoResultJson) => {
     res.render('todo', { todo: updatedTodoResultJson });
   });
 });
 
 /* POST REQUEST todo update page. */
-router.post('/update-todo/:todoOwner/:todoId', (req, res, next) => {
+router.post('/update-todo/:todoOwner/:todoId', (req, res) => {
   const params = req.body;
   fetch(`${domain}/api/v1/Todo/${req.params.todoId}`,
     {
