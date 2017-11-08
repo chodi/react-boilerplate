@@ -11,13 +11,11 @@ import {
   GET_TODO_SUCCESS,
   GET_TODO_FAIL,
 
-  UPDATE_TODO,
   UPDATE_TODO_SUCCESS,
   UPDATE_TODO_FAIL,
 
-  // DELETE_TODO,
-  // DELETE_TODO_SUCCESS,
-  // DELETE_TODO_FAIL,
+  DELETE_TODO_SUCCESS,
+  DELETE_TODO_FAIL,
 } from './constants';
 
 // The initial state of the App
@@ -53,23 +51,15 @@ function todoReducer(state = initialState, action) {
       return state
         .mergeIn([_id], params);
     }
-   /*
-
-    START OF COMMENT
 
     // ************************************
     // DELETE ToDo
     // ************************************
-    case DELETE_TODO:
-      return state
     case DELETE_TODO_FAIL:
-      return state
+      return state;
     case DELETE_TODO_SUCCESS:
       return state
-        .deleteIn(['allTodos', action.payload.id])
-
-    END OF COMMENT
-    */
+        .deleteIn([action.payload]);
     default:
       return state;
   }

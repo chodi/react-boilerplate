@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import request from 'utils/node-fetch-request';
 import createAddTodosApi from 'data/Todo/api/create';
 import createGetTodosApi from 'data/Todo/api/get';
 import createUpdateTodosApi from 'data/Todo/api/update';
+import createDeleteTodosApi from 'data/Todo/api/delete';
 
 import { ADD_TODO, UPDATE_TODO, DELETE_TODO, GET_TODO } from './constants';
 import stateName from './stateName';
@@ -26,6 +26,7 @@ import {
 const addTodosApi = createAddTodosApi(stateName);
 const getTodosApi = createGetTodosApi(stateName);
 const updateTodosApi = createUpdateTodosApi(stateName);
+const deleteTodosApi = createDeleteTodosApi(stateName);
 
 export function* getTodoSaga() {
   const username = window.USER.name;
@@ -68,13 +69,11 @@ export function* updateTodoSaga({ payload }) {
  */
 export function* deleteTodoSaga({ payload }) {
   const { _id } = payload;
-  const host = window.location.origin;
-  const requestURL = `${host}/api/v1/Todo/${_id}`;
-  try {
-    const newTodos = yield call(request.deleteRequest, requestURL, _id);
-    yield put(deleteTodoSuccess({ result: [newTodos.result], id: _id }));
-  } catch (err) {
-    yield put(deleteTodoFail(err));
+  const { result, error } = yield call(deleteTodosApi, _id);
+  if (result) {
+    yield put(deleteTodoSuccess(result));
+  } else {
+    yield put(deleteTodoFail(error));
   }
 }
 

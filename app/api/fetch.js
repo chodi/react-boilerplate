@@ -56,9 +56,13 @@ function genericFetch(url, params) {
     origFetch(url, params)
         .then((res) => {
           if (res.ok) {
-            res.json().then((data) => {
-              resolve(data);
-            });
+            if (res.status === 204) {
+              resolve({ result: 'ok' });
+            } else {
+              res.json().then((data) => {
+                resolve(data);
+              });
+            }
           } else if (res.json) {
             const { status, statusText } = res;
             // console.warn('error in request', url, params, res);
