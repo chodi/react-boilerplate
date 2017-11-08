@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
+import Bootstrap from 'containers/Bootstrap';
 import 'sanitize.css/sanitize.css';
 import 'antd/dist/antd.css';
 
@@ -71,9 +72,11 @@ const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App history={history} />
-        </ConnectedRouter>
+        <Bootstrap>
+          <ConnectedRouter history={history}>
+            <App history={history} />
+          </ConnectedRouter>
+        </Bootstrap>
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE

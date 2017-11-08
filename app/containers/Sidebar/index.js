@@ -14,6 +14,7 @@ const SidebarWrapper = styled.div`
 
 const ROUTE = {
   '/home': 'Home',
+  '/': 'Home',
   '/mytodos': 'MyTodos',
   '/settings': 'Settings',
 };

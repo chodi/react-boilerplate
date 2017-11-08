@@ -1,7 +1,7 @@
-import home from 'containers/Home/saga';
+import bootstrap from 'containers/Bootstrap/sagas';
 import todo from 'pages/TODO/sagas';
 
 export default [
-  ...home,
+  ...bootstrap,
   ...todo,
 ];

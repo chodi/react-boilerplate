@@ -9,7 +9,6 @@ import React from 'react';
 import { Input, Button, Layout, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCredentials } from 'containers/Home/actions';
 import LoadingIndicator from 'components/LoadingIndicator';
 import { getTodo, addTodo, updateTodo, deleteTodo } from './actions';
 import mapStateToProps from './selectors';
@@ -29,7 +28,6 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
   }
   componentWillMount() {
     this.props.onGetTodo();
-    this.props.getCredentials();
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.todoByOwner !== this.props.todoByOwner) {
@@ -128,7 +126,6 @@ Todo.propTypes = {
   onAddTodo: PropTypes.func,
   onUpdateTodo: PropTypes.func,
   onDeleteTodo: PropTypes.func,
-  getCredentials: PropTypes.func,
   todoByOwner: PropTypes.any,
   isLoading: PropTypes.bool,
 };
@@ -137,7 +134,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onGetTodo: () => dispatch(getTodo()),
     onAddTodo: (payload) => dispatch(addTodo(payload)),
-    getCredentials: () => dispatch(getCredentials()),
     onUpdateTodo: (payload) => dispatch(updateTodo(payload)),
     onDeleteTodo: (payload) => dispatch(deleteTodo(payload)),
   };
