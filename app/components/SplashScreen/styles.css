@@ -1,0 +1,133 @@
+.cs-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.logo {
+  background-color: #F6F5F3;
+  padding: 40px 10px 10px 40px;
+  display: inline-block;
+  position: absolute;
+}
+
+    .loading {
+        background-color: #F6F5F3;
+        background-image: url('https://chatbot-dot-wizy-workroom.appspot.com/assets/img/landing.png');
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .loading .status {
+        /*background-color: #F6F5F3;*/
+        padding: 12px 8px;
+        /*box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);*/
+        margin: 0 auto;
+    }
+    .loading .status > div {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .loading .status > div:first-child {
+        margin-top: 5px;
+    }
+    .loading .message {
+        font-size: 32px;
+        display: inline-block;
+        margin-top: 0;
+        margin-left: 5px;
+        text-shadow:
+            1px 1px 7px #fff,
+            1px 1px 7px #fff,
+            1px 1px 7px #fff,
+            1px 1px 7px #fff;
+    }
+.cs-loader-inner {
+  transform: translateY(-50%);
+  top: calc(50% + 20px);
+  position: absolute;
+  width: calc(100% - 200px);
+  color: #5E5E5E;
+  padding: 0 100px;
+  text-align: center;
+}
+
+.cs-loader-inner label {
+  font-size: 20px;
+  opacity: 0;
+  display: inline-block;
+}
+
+@keyframes lol {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  66% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
+/* stylelint-disable selector-type-no-unknown */
+@-webkit-keyframes lol {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  66% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+  }
+}
+
+.cs-loader-inner label:nth-child(6) {
+  -webkit-animation: lol 3s infinite ease-in-out;
+  animation: lol 3s infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(5) {
+  -webkit-animation: lol 3s 100ms infinite ease-in-out;
+  animation: lol 3s 100ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(4) {
+  -webkit-animation: lol 3s 200ms infinite ease-in-out;
+  animation: lol 3s 200ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(3) {
+  -webkit-animation: lol 3s 300ms infinite ease-in-out;
+  animation: lol 3s 300ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(2) {
+  -webkit-animation: lol 3s 400ms infinite ease-in-out;
+  animation: lol 3s 400ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(1) {
+  -webkit-animation: lol 3s 500ms infinite ease-in-out;
+  animation: lol 3s 500ms infinite ease-in-out;
+}
