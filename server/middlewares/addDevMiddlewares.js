@@ -28,7 +28,9 @@ module.exports = function addDevMiddlewares(app, webpackConfig) {
       if (err) {
         res.sendStatus(404);
       } else {
-        res.send(file.toString());
+        const user = req.cookies.user;
+        res.render('mainRoute', { user });
+        // res.send(file.toString());
       }
     });
   });
