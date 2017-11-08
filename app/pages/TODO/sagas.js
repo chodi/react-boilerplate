@@ -2,6 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'utils/node-fetch-request';
 import createAddTodosApi from 'data/Todo/api/create';
 import createGetTodosApi from 'data/Todo/api/get';
+import createUpdateTodosApi from 'data/Todo/api/update';
+
 import { ADD_TODO, UPDATE_TODO, DELETE_TODO, GET_TODO } from './constants';
 import stateName from './stateName';
 import {
@@ -23,6 +25,7 @@ import {
  */
 const addTodosApi = createAddTodosApi(stateName);
 const getTodosApi = createGetTodosApi(stateName);
+const updateTodosApi = createUpdateTodosApi(stateName);
 
 export function* getTodoSaga() {
   const username = window.USER.name;
@@ -53,12 +56,8 @@ export function* addTodoSaga({ payload }) {
  * update Todo
  */
 export function* updateTodoSaga({ payload }) {
-  // Select username from window
-  const { _id, ...params } = payload;
-  const host = window.location.origin;
-  const requestURL = `${host}/api/v1/Todo/${_id}`;
   try {
-    const updateTodo = yield call(request.updateRequest, requestURL, _id, params);
+    const updateTodo = yield call(updateTodosApi, payload);
     yield put(updateTodoSuccess(updateTodo.result));
   } catch (err) {
     yield put(updateTodoFail(err));
