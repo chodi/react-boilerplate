@@ -5,11 +5,9 @@
 import { fromJS } from 'immutable';
 import arrayToMap from 'utils/arrayToMap';
 import {
-  // ADD_TODO,
-  // ADD_TODO_SUCCESS,
-  // ADD_TODO_FAIL,
+  ADD_TODO_SUCCESS,
+  ADD_TODO_FAIL,
 
-  GET_TODO,
   GET_TODO_SUCCESS,
   GET_TODO_FAIL,
 
@@ -39,22 +37,17 @@ function todoReducer(state = initialState, action) {
     // ************************************
 
 
-    /*
-
-    START OF COMMENT
-
-
-
-    case ADD_TODO:
-      return state
     case ADD_TODO_FAIL:
       return state
     case ADD_TODO_SUCCESS: {
       const { _id } = action.payload;
       return state
-        // .update('allTodos', (todos) => todos.push(fromJS(action.payload)))
-        .mergeIn(['allTodos', _id], action.payload)
+        .mergeIn([_id], action.payload);
     }
+   /*
+
+    START OF COMMENT
+
     // ************************************
     // DELETE ToDo
     // ************************************

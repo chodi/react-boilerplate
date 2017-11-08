@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'utils/node-fetch-request';
+import createAddTodosApi from 'data/Todo/api/create';
 import createGetTodosApi from 'data/Todo/api/get';
 import { ADD_TODO, UPDATE_TODO, DELETE_TODO, GET_TODO } from './constants';
 import stateName from './stateName';
@@ -20,12 +21,11 @@ import {
 /**
  * Get Todo
  */
+const addTodosApi = createAddTodosApi(stateName);
 const getTodosApi = createGetTodosApi(stateName);
 
 export function* getTodoSaga() {
   const username = window.USER.name;
-  const host = window.location.origin;
-  // const requestURL = `${host}/api/v1/Todo?query={"owner":"${username}"}`;
   const { result, error } = yield call(getTodosApi, username);
   if (result) {
     yield put(getTodoSuccess(result));
@@ -41,10 +41,8 @@ export function* addTodoSaga({ payload }) {
   // Select username from window
   const username = window.USER.name;
   const todoPayload = { owner: username, ...payload };
-  const host = window.location.origin;
-  const requestURL = `${host}/api/v1/Todo`;
   try {
-    const newTodos = yield call(request.postRequest, requestURL, todoPayload);
+    const newTodos = yield call(addTodosApi, todoPayload);
     yield put(addTodoSuccess(newTodos.result));
   } catch (err) {
     yield put(addTodoFail(err));
