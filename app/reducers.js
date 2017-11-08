@@ -9,7 +9,14 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import loginCredentials from 'containers/Home/reducer';
-import todoReducer from 'pages/TODO/reducer';
+import todoPages from 'pages/TODO/reducer';
+
+
+/*
+* DATA Folder
+*/
+import todoData from 'data/Todo';
+
 
 /*
  * routeReducer
@@ -48,7 +55,8 @@ export default function createReducer(injectedReducers) {
     global: globalReducer,
     language: languageProviderReducer,
     loginCredentials,
-    todos: todoReducer,
+    [todoPages.stateName]: todoPages.reducer,
+    [todoData.stateName]: todoData.reducer,
     ...injectedReducers,
   });
 }

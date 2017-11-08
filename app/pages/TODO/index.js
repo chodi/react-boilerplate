@@ -24,7 +24,7 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
     this.state = {
       inputDescription: '',
       inputTodo: '',
-      todos: props.allTodos || [],
+      todos: props.todoByOwner || [],
     };
   }
   componentWillMount() {
@@ -32,8 +32,8 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
     this.props.getCredentials();
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.allTodos !== this.props.allTodos) {
-      this.setState({ todos: nextProps.allTodos });
+    if (nextProps.todoByOwner !== this.props.todoByOwner) {
+      this.setState({ todos: nextProps.todoByOwner });
     }
   }
   onChangeHandler = (stateId, value) => {
@@ -129,7 +129,7 @@ Todo.propTypes = {
   onUpdateTodo: PropTypes.func,
   onDeleteTodo: PropTypes.func,
   getCredentials: PropTypes.func,
-  allTodos: PropTypes.any,
+  todoByOwner: PropTypes.any,
   isLoading: PropTypes.bool,
 };
 

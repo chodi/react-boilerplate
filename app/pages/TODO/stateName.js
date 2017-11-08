@@ -1,1 +1,1 @@
-export default 'todos';
+export default 'todoPages';
