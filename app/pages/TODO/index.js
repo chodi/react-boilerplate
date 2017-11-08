@@ -6,15 +6,13 @@
 
 import React from 'react';
 // ANTD
-import { Input, Button } from 'antd';
+import { Input, Button, Layout, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCredentials } from 'containers/Home/actions';
 import LoadingIndicator from 'components/LoadingIndicator';
-import { getTodo, addTodo } from './actions';
+import { getTodo, addTodo, updateTodo, deleteTodo } from './actions';
 import mapStateToProps from './selectors';
-import { Layout, Icon } from 'antd';
-import styled from 'styled-components';
 import LayOut from './LayOut';
 
 const { Header, Content } = Layout;
@@ -30,7 +28,7 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
     };
   }
   componentWillMount() {
-    this.props.getTodo();
+    this.props.onGetTodo();
     this.props.getCredentials();
   }
   componentWillReceiveProps(nextProps) {
@@ -43,8 +41,16 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
   }
   onAddTodo = () => {
     const { inputDescription, inputTodo } = this.state;
-    this.props.addTodo({ todo: inputTodo, description: inputDescription });
+    this.props.onAddTodo({ todo: inputTodo, description: inputDescription });
     this.setState({ inputDescription: '', inputTodo: '' });
+  }
+  onUpdateTodo = (todo) => {
+    const todoObj = todo.toJS();
+    this.props.onUpdateTodo({ ...todoObj, isCompleted: !todoObj.isCompleted });
+  }
+  onDeleteTodo = (todo) => {
+    const todoObj = todo.toJS();
+    this.props.onDeleteTodo(todoObj);
   }
   render() {
     const { inputDescription, inputTodo, todos } = this.state;
@@ -58,36 +64,70 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
             <span style={{ fontSize: '20px', marginLeft: '20px' }}>home</span>
           </Header>
           <Content style={{ padding: 24, background: '#eee', minHeight: 280, overflowY: 'auto' }}>
-            <Input onChange={(value) => this.onChangeHandler('inputTodo', value)} onPressEnter={this.onAddTodo} placeholder="Add new Task" size="large" value={inputTodo} />
-            <Input style={{ marginTop: '20px' }} onChange={(value) => this.onChangeHandler('inputDescription', value)} onPressEnter={this.onAddTodo} placeholder="DESCRIPTION" size="large" value={inputDescription} />
-            <Button style={{ marginTop: '20px', marginBottom: '20px' }} type="primary" onClick={this.onAddTodo} >Add</Button>
+            <Input
+              onChange={(value) => this.onChangeHandler('inputTodo', value)}
+              onPressEnter={this.onAddTodo}
+              placeholder="Add new Task"
+              size="large"
+              value={inputTodo}
+            />
+            <Input
+              style={{ marginTop: '20px' }}
+              onChange={(value) => this.onChangeHandler('inputDescription', value)}
+              onPressEnter={this.onAddTodo}
+              placeholder="DESCRIPTION"
+              size="large"
+              value={inputDescription}
+            />
+            <Button
+              style={{ marginTop: '20px', marginBottom: '20px' }}
+              type="primary"
+              onClick={this.onAddTodo}
+            >Add
+            </Button>
             <div style={{ overflow: 'scroll', height: '400px', backgroundColor: '#f7f7f7' }} >
               {
                 this.props.isLoading ?
                   <LoadingIndicator /> :
-                    <ul>{todos && todos.map((todo) => {
-                      return (
-                        <li key={todo.get('_id')} style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
-                          <div>{todo.get('todo')}</div>
-                          <div><Button type="primary" icon="delete" size="small">Mark as Completed</Button></div>
-                          <div><Button type="danger" icon="delete" size="small">DELETE</Button></div>
-                        </li>
-                      );
-                    })
-                  }</ul>
+                  <ul>{todos && todos.map((todo) => {
+                    return (
+                      <li key={todo.get('_id')} style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
+                        <div>
+                          <Button
+                            type={todo.get('isCompleted') ? 'default' : 'primary'}
+                            icon="check-circle-o"
+                            size="small"
+                            onClick={() => this.onUpdateTodo(todo)}
+                          >{todo.get('isCompleted') ? 'Mark as not Completed' : 'Mark as Completed'}
+                          </Button>
+                        </div>
+                        <div style={{ marginLeft: 5, marginRight: 5 }}>
+                          <Button
+                            type="danger"
+                            icon="delete"
+                            size="small"
+                            onClick={() => this.onDeleteTodo(todo)}
+                          >DELETE
+                          </Button>
+                        </div>
+                        <div>{todo.get('todo')}</div>
+                      </li>
+                    );
+                  })}</ul>
               }
             </div>
           </Content>
         </LayOut>
-
       </div>
     );
   }
 }
 
 Todo.propTypes = {
-  getTodo: PropTypes.func,
-  addTodo: PropTypes.func,
+  onGetTodo: PropTypes.func,
+  onAddTodo: PropTypes.func,
+  onUpdateTodo: PropTypes.func,
+  onDeleteTodo: PropTypes.func,
   getCredentials: PropTypes.func,
   allTodos: PropTypes.any,
   isLoading: PropTypes.bool,
@@ -95,9 +135,11 @@ Todo.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getTodo: () => dispatch(getTodo()),
-    addTodo: (payload) => dispatch(addTodo(payload)),
+    onGetTodo: () => dispatch(getTodo()),
+    onAddTodo: (payload) => dispatch(addTodo(payload)),
     getCredentials: () => dispatch(getCredentials()),
+    onUpdateTodo: (payload) => dispatch(updateTodo(payload)),
+    onDeleteTodo: (payload) => dispatch(deleteTodo(payload)),
   };
 }
 

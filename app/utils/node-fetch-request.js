@@ -33,5 +33,36 @@ const postRequest = (url, params) => {
   .catch((error) => ({ result: {}, error }));
 };
 
-const request = { getRequest, postRequest }
+
+const updateRequest = (url, id, params) => {
+  return fetch(url,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    }
+  )
+  .then((result) => {
+    return result.json();
+  })
+  .then((result) => ({ result, error: {} }))
+  .catch((error) => ({ result: {}, error }));
+};
+
+const deleteRequest = (url, id, params) => {
+  return fetch(url,
+    {
+      method: 'DELETE',
+    }
+  )
+  .then((result) => {
+    return result;
+  })
+  .then((result) => ({ result, error: {} }))
+  .catch((error) => ({ result: {}, error }));
+};
+
+const request = { getRequest, postRequest, updateRequest, deleteRequest };
 export default request;
