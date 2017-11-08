@@ -8,7 +8,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFoundPage from 'pages/NotFoundPage/Loadable';
 import Content from 'containers/Content';
 import Home from 'pages/Home';
@@ -31,18 +31,17 @@ const AppWrapper = styled.div`
   flex-direction: row;
 `;
 
-export default function App() {
+export default function App(props) {
   return (
     <AppWrapper>
-      <Sidebar />
+      <Sidebar {...props.history} />
       <ContentWrapper>
         <Content>
           <Switch>
             <Route path="/mytodos" component={TODO} />
             <Route path="/settings" component={Settings} />
-            <Route path="/dashboard" component={Home} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="*" component={NotFoundPage} />
+            <Route path="/home" component={Home} />
+            <Redirect push from="*" to="/home" />
           </Switch>
         </Content>
       </ContentWrapper>

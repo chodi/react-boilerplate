@@ -12,13 +12,20 @@ const SidebarWrapper = styled.div`
   height: 100%;
 `;
 
+const ROUTE = {
+  '/home': 'Home',
+  '/mytodos': 'MyTodos',
+  '/settings': 'Settings',
+};
+
 class SideBar extends React.Component {
 
   constructor(props) {
     super(props);
+    const { location: { pathname } } = props;
     this.state = {
       collapsed: false,
-      activeKey: 'Home',
+      activeKey: ROUTE[pathname],
     };
   }
   onChangeMenu = ({ key }) => {
@@ -39,9 +46,9 @@ class SideBar extends React.Component {
           collapsed={this.state.collapsed}
           className={styles['sidebar-wrapper']}
         >
-          <Menu className={styles['sidebar-wrapper']} theme="dark" mode="inline" onClick={this.onChangeMenu} activeKey={this.state.activeKey} defaultSelectedKeys={['Home']}>
+          <Menu className={styles['sidebar-wrapper']} theme="dark" mode="inline" onClick={this.onChangeMenu} activeKey={this.state.activeKey} defaultSelectedKeys={[this.state.activeKey]}>
             <MITEM key="Home">
-              <Link style={{ color: '#fff' }} to="/dashboard">
+              <Link style={{ color: '#fff' }} to="/home">
                 <Icon type="home" />
                 <span>Home</span>
               </Link>
