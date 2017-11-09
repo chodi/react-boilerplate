@@ -11,6 +11,10 @@ function userModel(mongoose) {
     password: String,
     password2: String,
     name: String,
+    facebook: {
+      id: String,
+      token: String,
+    },
   });
 
 

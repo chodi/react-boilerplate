@@ -6,6 +6,8 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
 const restify = require('express-restify-mongoose');
+const secret = require('../SECRET').secretkey;
+const jwt = require('jsonwebtoken');
 
 // connect to the database and load models
 require('./models').connect(mongoose);
@@ -39,12 +41,14 @@ app.use(passport.session());
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
+const facebookStrategy = require('./passport/facebook');
 
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
+passport.use('facebook', facebookStrategy);
 
 // View engine
-app.engine('handlebars', exphbs(/*{ defaultLayout: 'main' }*/));
+app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -62,6 +66,23 @@ const authRoutes = require('./routes/auth');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const todo = require('./routes/todo');
+
+app.get('/login/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false }));
+
+app.get('/login/facebook/return', passport.authenticate('facebook', {
+  failureRedirect: '/login',
+  session: false,
+}), (req, res) => {
+  const expiresIn = 60 * 60 * 24 * 180; // 180 days
+  const payload = {
+    sub: req.user._id, // eslint-disable-line no-underscore-dangle
+  };
+  const token = jwt.sign(payload, secret, { expiresIn });
+  console.log('facebook callback', token);
+  res.cookie('userToken', token, { maxAge: 1000 * expiresIn, httpOnly: true });
+  res.redirect('/');
+  return null;
+});
 
 app.use('/auth', authRoutes(passport));
 // app.use('/api', apiRoutes);
@@ -106,8 +127,10 @@ app.listen(port, host, (err) => {
       }
 
       logger.appStarted(port, prettyHost, url);
+      return null;
     });
   } else {
     logger.appStarted(port, prettyHost);
   }
+  return null;
 });

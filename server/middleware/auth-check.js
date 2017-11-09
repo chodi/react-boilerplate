@@ -7,13 +7,17 @@ const thisisacomplexkeyword = isDev ? secret : process.env.COMPLEX_HASH_LETTERS;
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
+  console.log('url', req.url);
   if (req.url === '/logout'
     || req.url === '/favicon.ico'
     || req.url === '/signup'
+    || req.url.indexOf('/login/facebook/return') > -1
+    || req.url === '/login/facebook'
     || req.url === '/auth/signup'
     || req.url === '/login'
     || (req.url === '/auth/login' && req.method === 'POST')
   ) {
+    console.log('next --->');
     return next();
   }
   const tokenExists = req.headers.authorization || req.cookies.userToken;
