@@ -19,6 +19,24 @@ const authCheckMiddleware = require('./middleware/auth-check');
 
 const cookieParser = require('cookie-parser');
 const app = express();
+
+// *************************************
+//    PUT YOUR OWN VALUES HERE
+// *************************************
+const secret = require('../SECRET');
+const PROJECT_ID = secret.projectId;
+const FILENAME = secret.filename;
+
+// *****************************
+const gstore = require('gstore-node')();
+const datastore = require('@google-cloud/datastore')({
+  projectId: PROJECT_ID,
+  keyFilename: path.join(__dirname, FILENAME),
+});
+require('./models/userDStore');
+gstore.connect(datastore);
+
+
 // need cookieParser middleware before we can do anything with cookies
 app.use(cookieParser());
 
