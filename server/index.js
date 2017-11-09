@@ -74,6 +74,7 @@ app.get('/login/facebook/return', passport.authenticate('facebook', {
   session: false,
 }), (req, res) => {
   const expiresIn = 60 * 60 * 24 * 180; // 180 days
+  console.log('req.user', req.user);
   const payload = {
     sub: req.user._id, // eslint-disable-line no-underscore-dangle
   };

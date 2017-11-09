@@ -26,14 +26,17 @@ module.exports = (req, res, next) => {
   }
   const token = req.cookies.userToken || req.headers.authorization.split(' ')[1];
   // decode the token using a secret key-phrase
+  console.log('token', token);
 
   return jwt.verify(token, thisisacomplexkeyword, (err, decoded) => {
     // the 401 code is for unauthorized status
-    if (err) { return res.status(401).end(); }
+    console.log('jwt verify', err, decoded);
+    if (err) { console.log('401', err, decoded); return res.status(401).end(); }
     const userId = decoded.sub;
 
     // check if a user exists
     return User.findById(userId, (userErr, user) => {
+      console.log('user.findById', userId, userErr, user);
       if (userErr || !user) {
         return res.status(401).end();
       }

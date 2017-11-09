@@ -38,18 +38,20 @@ module.exports = new FacebookStrategy({
   console.log('facebook profile', profile);
   User.findOne({ 'facebook.id': profile.id }, (err, user) => {
     if (user) {
+      console.log('usr found', user);
       // There is already a Facebook account that belongs to you.
       // Sign in with that account or delete it, then link it with your current account.
       done(null, user);
     } else {
-      User.create({
+      const u = new User({
         facebook: {
           id: profile.id,
         },
         email: profile._json.email, // eslint-disable-line no-underscore-dangle
         name: profile.displayName,
-      }, (e, u) => {
-        done(null, u);
+      });
+      u.save((e, createdUser) => {
+        done(null, createdUser);
       });
     }
   });
