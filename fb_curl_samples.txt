@@ -1,0 +1,63 @@
+curl -X POST -H "Content-Type: application/json" -d '{
+  "recipient": {
+    "id": "1431887643545999"
+  },
+  "message": {
+    "text": "hello, world!"
+  }
+}' "https://graph.facebook.com/v2.11/me/messages?access_token=EAAFOldGZAe6YBAGZBgbePrzZA9C4g7BtUlZCb2ZBuoLpvDRbGggiQStsvzZCIhi6mVAz8drEcNkkARL1F5vlFk5tY1QllwZBJ3ZB3LAjLSJI7OIsCIab1z31ikTzDcvwsaggKPxkHcGH3JeFHn0sFzmpt2ldLCLopil7k1Lg4VaI4wZDZD"
+
+
+
+    /{page-id}?fields=access_token
+
+
+    curl "https://graph.facebook.com/v2.6/1477724478976458?fields=access_token&access_token=EAAFOldGZAe6YBAETc1JohEb6xzhZARdav5r7upafs9W6ZB3091PiWG6NLSemlkjeX1CDJeTVR18ELCBFmzZBjG1jfRlZA14eZB5nsLxsTvhNCZCo1UFbVvW5bAbxZBf1qaO232NYGZBkNX80CcOjJplI7V9OcE0wYlkLDMCDr9NZCxDAZDZD"
+
+curl "https://graph.facebook.com/v2.6/877867802390800?fields=access_token&access_token=EAAFOldGZAe6YBAIRa1xjfDSh64tVOPoJZB3pzVTQZAjBgQPXDQEFxouPQgPh4kGxu1zWUeyEibkLLY3UbfvoEQbNrsd2HWn1W96oCBo6RaS1v7FrDli7TA4WFBNxozhVSpyZAk2pfBikNZAMZBjZBLQ0lTuHOuXGM6dy9OZB6Q1FFQZDZD"
+
+
+EAAFOldGZAe6YBAGZBgbePrzZA9C4g7BtUlZCb2ZBuoLpvDRbGggiQStsvzZCIhi6mVAz8drEcNkkARL1F5vlFk5tY1QllwZBJ3ZB3LAjLSJI7OIsCIab1z31ikTzDcvwsaggKPxkHcGH3JeFHn0sFzmpt2ldLCLopil7k1Lg4VaI4wZDZD
+EAAFOldGZAe6YBAPIc3HSuZCv7OrqxL8V3cfzeZAvEp7SZAXZCdzwS0lEUgxiWM75OeaZBN11OHHFu4U93CUKpBrsbMA4XdYqzJc4ED9dbrYGXf8NiHyaFLSsCm4aueZBl5qJxJkFzYKZCwk4W13k0zpXBqRD6XZBJlrBGC84RfDOliQZDZD
+
+EAAFOldGZAe6YBAGwziZAPCh3E5RsM6stxi1AVx6SdO6CjFMZAT43qPRLOWD9Uu5WOehMbM68wwyTNBRstBtN5S0bztIt5CXZCXM3y958ouS0HZC6D9YiED92wkOpQVZAtU42OuTKHMJZCdpSBW7cdM57iA841i1NabWA7EJayw29wZDZD
+
+
+
+curl "https://graph.facebook.com/v2.11/me/conversations?access_token=EAAFOldGZAe6YBAGZBgbePrzZA9C4g7BtUlZCb2ZBuoLpvDRbGggiQStsvzZCIhi6mVAz8drEcNkkARL1F5vlFk5tY1QllwZBJ3ZB3LAjLSJI7OIsCIab1z31ikTzDcvwsaggKPxkHcGH3JeFHn0sFzmpt2ldLCLopil7k1Lg4VaI4wZDZD"
+
+
+curl "https://graph.facebook.com/v2.11/t_100021733783870/messages?access_token=EAAFOldGZAe6YBAGZBgbePrzZA9C4g7BtUlZCb2ZBuoLpvDRbGggiQStsvzZCIhi6mVAz8drEcNkkARL1F5vlFk5tY1QllwZBJ3ZB3LAjLSJI7OIsCIab1z31ikTzDcvwsaggKPxkHcGH3JeFHn0sFzmpt2ldLCLopil7k1Lg4VaI4wZDZD"
+
+
+
+
+curl "https://graph.facebook.com/v2.11/AAVlA5VMSPRl0zxb7lfofcTjTUdw?access_token=EAAFOldGZAe6YBAGZBgbePrzZA9C4g7BtUlZCb2ZBuoLpvDRbGggiQStsvzZCIhi6mVAz8drEcNkkARL1F5vlFk5tY1QllwZBJ3ZB3LAjLSJI7OIsCIab1z31ikTzDcvwsaggKPxkHcGH3JeFHn0sFzmpt2ldLCLopil7k1Lg4VaI4wZDZD"
+
+
+curl "https://graph.facebook.com/v2.11/100021733783870?access_token=EAAFOldGZAe6YBAGZBgbePrzZA9C4g7BtUlZCb2ZBuoLpvDRbGggiQStsvzZCIhi6mVAz8drEcNkkARL1F5vlFk5tY1QllwZBJ3ZB3LAjLSJI7OIsCIab1z31ikTzDcvwsaggKPxkHcGH3JeFHn0sFzmpt2ldLCLopil7k1Lg4VaI4wZDZD"
+
+
+curl \
+-F "object=page" \
+-F "callback_url=https://42455e24.ngrok.io/hook" \
+-F "fields=conversations" \
+-F "verify_token=1234" \
+-F "access_token=367880350301094|IolN74KABl9D0CX7nXACaO7h5aI" \
+"https://graph.facebook.com/367880350301094/subscriptions"
+
+
+curl "https://graph.facebook.com/v2.11/oauth/access_token?client_id=367880350301094&client_secret=ddf7e98555bd086ceed3b782be24776a&grant_type=client_credentials"
+
+
+curl ""
+
+curl -X POST "https://graph.facebook.com/v2.6/877867802390800/subscribed_apps?access_token=EAAFOldGZAe6YBAPtKwSQxljpGrx5nEa4M2l8Nrha4KoS3DnxQCmcFZArM0Ffw7ofplrYRn3VtDe9aIcRgHHPPlV4FI0ZBGXIld6UDjOAXPAJNjJxdaRE8Xvq8LZAp1P9UwuNWZAXLm5hjFedsJthyWZA37BmdsxKrZAae5DukpOWwZDZD"
+
+curl -X POST "https://qnamaker.ai/knowledgebases/7725d50a-84ea-4b66-85fb-4428a92ada64/generateAnswer
+Host: https://westus.api.cognitive.microsoft.com/qnamaker/v2.0
+Ocp-Apim-Subscription-Key: 588f5a33ec7646769b2e7092d84d0dc8
+Content-Type: application/json
+
+{"question":"hi"}"
+curl -X POST -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: 588f5a33ec7646769b2e7092d84d0dc8" -d '{"question":"what are the three main features?"}"' "https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/7725d50a-84ea-4b66-85fb-4428a92ada64/generateAnswer"

@@ -2,12 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const logger = require('./logger');
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
 const restify = require('express-restify-mongoose');
-const secret = require('../SECRET').secretkey;
-const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 // connect to the database and load models
 require('./models').connect(mongoose);
@@ -41,7 +39,6 @@ gstore.connect(datastore);
 
 // need cookieParser middleware before we can do anything with cookies
 app.use(cookieParser());
-
 
 // tell the app to parse HTTP body messages
 app.use(bodyParser.json());
@@ -84,24 +81,8 @@ const authRoutes = require('./routes/auth');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const todo = require('./routes/todo');
+const facebook = require('./routes/facebook');
 
-app.get('/login/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false }));
-
-app.get('/login/facebook/return', passport.authenticate('facebook', {
-  failureRedirect: '/login',
-  session: false,
-}), (req, res) => {
-  const expiresIn = 60 * 60 * 24 * 180; // 180 days
-  console.log('req.user', req.user);
-  const payload = {
-    sub: req.user._id, // eslint-disable-line no-underscore-dangle
-  };
-  const token = jwt.sign(payload, secret, { expiresIn });
-  console.log('facebook callback', token);
-  res.cookie('userToken', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-  res.redirect('/');
-  return null;
-});
 
 app.use('/auth', authRoutes(passport));
 // app.use('/api', apiRoutes);
@@ -109,6 +90,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/todo', todo);
+app.use('/facebook', facebook);
 app.use(router);
 
 const argv = require('./argv');

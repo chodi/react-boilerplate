@@ -14,6 +14,8 @@ function userModel(mongoose) {
     facebook: {
       id: String,
       token: String,
+      accessToken: String,
+      refreshToken: String,
     },
   });
 

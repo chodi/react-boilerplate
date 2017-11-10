@@ -8,12 +8,14 @@ const UserDStoreController = require('../controller/userDStore');
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
-  console.log('url', req.url);
+  console.log('url', req.url, req.method);
   if (req.url === '/logout'
     || req.url === '/favicon.ico'
     || req.url === '/signup'
-    || req.url.indexOf('/login/facebook/return') > -1
-    || req.url === '/login/facebook'
+    || req.url.indexOf('/facebook/login') > -1
+    || req.url.indexOf('/facebook/webhook') > -1
+    || req.url.indexOf('/facebook/hook') > -1
+    || req.url.indexOf('/facebook/auth/callback') > -1
     || req.url === '/auth/signup'
     || req.url === '/login'
     || (req.url === '/auth/login' && req.method === 'POST')
