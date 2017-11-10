@@ -25,6 +25,19 @@ const getUser = (req, res, cb) => {
     .catch((err) => res.status(400).json(err));
     // .catch((err) => cb(null, err));
 };
+/*
+* Customize get USer from datastore
+* that pass by userId and not by request params
+*/
+const getUserDStore = (userId, req, res, cb) => {
+  User.get(userId)
+    .then((entity) => {
+      // res.json(entity.plain());
+      cb(entity.plain());
+    })
+    // .catch((err) => res.status(400).json(err));
+    .catch((err) => cb(null, err));
+};
 
 const createUser = (req, res, cb) => {
   const entityData = User.sanitize(req.body);
@@ -79,4 +92,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+
+  getUserDStore,
 };

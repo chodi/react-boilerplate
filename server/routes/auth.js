@@ -42,7 +42,7 @@ function validateSignupForm(payload) {
   return {
     success: isFormValid,
     message,
-    errors
+    errors,
   };
 }
 
@@ -99,7 +99,7 @@ module.exports = (passport) => {
             message: 'Check the form for errors.',
             errors: {
               email: 'This email is already taken.',
-            }
+            },
           });
         }
 
@@ -112,8 +112,7 @@ module.exports = (passport) => {
       //   success: true,
       //   message: 'Success Message',
       // });
-      return res.redirect('/login')
-      // return res.redirect('/api');
+      return res.redirect('/login');
     })(req, res, next);
   });
 
@@ -123,7 +122,7 @@ module.exports = (passport) => {
       return res.status(400).json({
         success: false,
         message: validationResult.message,
-        errors: validationResult.errors
+        errors: validationResult.errors,
       });
     }
 
@@ -140,7 +139,7 @@ module.exports = (passport) => {
         return res.status(400).json({
           status: 400,
           success: false,
-          message: 'Could not process the form.'
+          message: 'Could not process the form.',
         });
       }
       return res.status(200).json({
