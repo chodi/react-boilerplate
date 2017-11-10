@@ -26,9 +26,13 @@ function validateSignupForm(payload) {
     errors.password = 'Password must have at least 8 characters.';
   }
 
-  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
+  if (!payload || typeof payload.firstname !== 'string' || payload.firstname.trim().length === 0) {
     isFormValid = false;
-    errors.name = 'Please provide your name.';
+    errors.firstname = 'Please provide your firstname.';
+  }
+  if (!payload || typeof payload.lastname !== 'string' || payload.lastname.trim().length === 0) {
+    isFormValid = false;
+    errors.lastname = 'Please provide your lastname.';
   }
 
   if (!isFormValid) {
@@ -38,7 +42,7 @@ function validateSignupForm(payload) {
   return {
     success: isFormValid,
     message,
-    errors
+    errors,
   };
 }
 
@@ -95,7 +99,7 @@ module.exports = (passport) => {
             message: 'Check the form for errors.',
             errors: {
               email: 'This email is already taken.',
-            }
+            },
           });
         }
 
@@ -108,8 +112,7 @@ module.exports = (passport) => {
       //   success: true,
       //   message: 'Success Message',
       // });
-      return res.redirect('/login')
-      // return res.redirect('/api');
+      return res.redirect('/login');
     })(req, res, next);
   });
 
@@ -119,7 +122,7 @@ module.exports = (passport) => {
       return res.status(400).json({
         success: false,
         message: validationResult.message,
-        errors: validationResult.errors
+        errors: validationResult.errors,
       });
     }
 
@@ -136,7 +139,7 @@ module.exports = (passport) => {
         return res.status(400).json({
           status: 400,
           success: false,
-          message: 'Could not process the form.'
+          message: 'Could not process the form.',
         });
       }
       return res.status(200).json({

@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
-const User = require('mongoose').model('User');
+// const User = require('mongoose').model('User');
 const isDev = process.env.NODE_ENV !== 'production';
 const secret = isDev ? require('../../SECRET').secretkey : '';
 const thisisacomplexkeyword = isDev ? secret : process.env.COMPLEX_HASH_LETTERS;
+const UserDStoreController = require('../controller/userDStore');
 /**
  *  The Auth Checker middleware function.
  */
@@ -34,9 +35,17 @@ module.exports = (req, res, next) => {
     if (err) { console.log('401', err, decoded); return res.status(401).end(); }
     const userId = decoded.sub;
 
-    // check if a user exists
-    return User.findById(userId, (userErr, user) => {
-      console.log('user.findById', userId, userErr, user);
+    /*
+    * check if a user exists
+    *
+    */
+  //   return User.findById(userId, (userErr, user) => {
+  //     if (userErr || !user) {
+  //       return res.status(401).end();
+  //     }
+  //     return next();
+  //   });
+    return UserDStoreController.getUserDStore(userId, req, res, (user, userErr) => {
       if (userErr || !user) {
         return res.status(401).end();
       }
