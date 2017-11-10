@@ -24,14 +24,12 @@ const app = express();
 //    PUT YOUR OWN VALUES HERE
 // *************************************
 const secret = require('../SECRET');
-const PROJECT_ID = secret.projectId;
-const FILENAME = secret.filename;
 
 // *****************************
 const gstore = require('gstore-node')();
 const datastore = require('@google-cloud/datastore')({
-  projectId: PROJECT_ID,
-  keyFilename: path.join(__dirname, FILENAME),
+  projectId: secret.datastore.projectId,
+  keyFilename: path.join(__dirname, secret.datastore.file),
 });
 require('./models/userDStore');
 gstore.connect(datastore);
