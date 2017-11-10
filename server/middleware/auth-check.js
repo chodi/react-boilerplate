@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
     || req.url.indexOf('/facebook/hook') > -1
     || req.url.indexOf('/facebook/auth/callback') > -1
     || req.url === '/auth/signup'
+    || req.url === '/login/local'
     || req.url === '/login'
     || (req.url === '/auth/login' && req.method === 'POST')
   ) {

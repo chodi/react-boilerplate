@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 */
 const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://react-boilerplate-login.herokuapp.com';
 
-console.warn(" \n***************************************************** \n IF YOU ARE RUNNING THE PROD SCRIPT BUT USING LOCALHOST \n PLEASE SET THE DOMAIN VALUE in:\n", __dirname, "/login\n *****************************************************")
+console.warn(' \n***************************************************** \n IF YOU ARE RUNNING THE PROD SCRIPT BUT USING LOCALHOST \n PLEASE SET THE DOMAIN VALUE in:\n', __dirname, '/login\n *****************************************************');
 // Login Page
 router.get('/', (req, res) => {
   res.render('login');
@@ -30,15 +30,18 @@ router.post('/', (req, res) => {
   .then((json) => {
     if (json.status === 200 && json.token) {
       res.cookie('userToken', json.token, { maxAge: 900000, httpOnly: true });
-      const user = { name: json.user.name, email: json.user.email, username: json.user.email };
+      const user = { newData: json.user.newData, name: json.user.name, email: json.user.email, username: json.user.email };
       res.cookie('user', user, { maxAge: 900000, httpOnly: true });
-      console.log("I will be redirected to home")
       res.redirect('/');
     } else {
-      console.log("I will be redirected to Login")
       res.redirect('/login');
     }
   });
+});
+
+// LOCAL-Login Page
+router.get('/local', (req, res) => {
+  res.render('local-login');
 });
 
 module.exports = router;
