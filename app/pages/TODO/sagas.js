@@ -28,9 +28,8 @@ const getTodosApi = createGetTodosApi(stateName);
 const updateTodosApi = createUpdateTodosApi(stateName);
 const deleteTodosApi = createDeleteTodosApi(stateName);
 
-export function* getTodoSaga() {
-  const username = window.USER.name;
-  const { result, error } = yield call(getTodosApi, username);
+export function* getTodoSaga({ payload }) {
+  const { result, error } = yield call(getTodosApi, payload);
   if (result) {
     yield put(getTodoSuccess(result));
   } else {

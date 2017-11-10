@@ -1,32 +1,22 @@
 // Todo.constroller.js
 
-const gstore = require('gstore-node')();
+// const gstore = require('gstore-node')();
 const Todo = require('../models/todoDStore');
 
-const getTodos = (req, res) => {
-  const pageCursor = req.query.cursor;
-  Todo.list({ start: pageCursor })
-    .then((entities) => {
-      res.json(entities);
+
+const getTodo = (req, res) => {
+  const todoId = req.query.id;
+  Todo.get(todoId)
+    .then((entity) => {
+      res.json(entity.plain());
     })
     .catch((err) => res.status(400).json(err));
 };
-
-// const getTodo = (req, res) => {
-//   const userId = +req.params.userId;
-//   Todo.get(userId)
-//     .then((entity) => {
-//       res.json(entity.plain());
-//       // cb(entity.plain());
-//     })
-//     .catch((err) => res.status(400).json(err));
-//     // .catch((err) => cb(null, err));
-// };
 /*
 * Customize get USer from datastore
 * that pass by userId and not by request params
 */
-const getTodoDStore = (ownerId, req, res) => {
+const getTodoDStore = (req, res) => {
   Todo.list()
     .then((entity) => {
       res.json(entity.entities);
@@ -63,8 +53,8 @@ const updateTodo = (req, res) => {
 };
 
 const deleteTodo = (req, res) => {
-  const userId = +req.params.userId;
-  Todo.delete(userId)
+  const todoId = +req.params.todoId;
+  Todo.delete(todoId)
     .then((response) => {
       res.json(response);
     })
@@ -72,8 +62,7 @@ const deleteTodo = (req, res) => {
 };
 
 module.exports = {
-  getTodos,
-  // getTodo,
+  getTodo,
   createTodo,
   updateTodo,
   deleteTodo,

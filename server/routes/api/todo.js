@@ -2,21 +2,31 @@ const express = require('express');
 const router = express.Router();
 const todoDStoreController = require('../../controller/todoDStore');
 
-/* POST CREATE todo page. */
+/* POST todo api. */
 router.post('/', (req, res) => {
   todoDStoreController.createTodo(req, res);
 });
 
-
-/* GET todo page. */
+/* GET todo api. */
 router.get('/', (req, res) => {
-  const owner = req.cookies.user.name;
-  todoDStoreController.getTodoDStore({ owner }, req, res);
+  const todoId = req.query.id === 'undefined';
+  if (todoId) {
+    // List ALL todos
+    todoDStoreController.getTodoDStore(req, res);
+  } else {
+    // For Specific ToDo ID
+    todoDStoreController.getTodo(req, res);
+  }
 });
 
-/* PUT todo page. */
+/* PUT todo api. */
 router.put('/:todoId', (req, res) => {
   todoDStoreController.updateTodo(req, res);
+});
+
+/* DELETE todo api. */
+router.delete('/:todoId', (req, res) => {
+  todoDStoreController.deleteTodo(req, res);
 });
 
 

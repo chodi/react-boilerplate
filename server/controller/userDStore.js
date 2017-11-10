@@ -1,6 +1,5 @@
 // user.constroller.js
 
-const gstore = require('gstore-node')();
 const User = require('../models/userDStore');
 
 const getUsers = (req, res, cb) => {
