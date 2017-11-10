@@ -14,10 +14,9 @@ router.get('/', (req, res) => {
   todoDStoreController.getTodoDStore({ owner }, req, res);
 });
 
-/* GET todo page. */
-router.put('/', (req, res) => {
-  const owner = req.cookies.user.name;
-  todoDStoreController.getTodoDStore({ owner }, req, res);
+/* PUT todo page. */
+router.put('/:todoId', (req, res) => {
+  todoDStoreController.updateTodo(req, res);
 });
 
 

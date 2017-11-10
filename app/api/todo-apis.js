@@ -10,7 +10,7 @@ const endpoints = `${host}/api/v1/Todo`;
 
 export const addTodo = (data) => fetchPost(`${host}/api/todo`, data);
 
-export const updateTodo = (todoId, data) => fetchPut(`${endpoints}/${todoId}`, data);
+export const updateTodo = (todoId, data) => fetchPut(`${host}/api/todo/${todoId}`, data);
 
 export const deleteTodo = (id) => fetchDelete(`${endpoints}/${id}`);
 
