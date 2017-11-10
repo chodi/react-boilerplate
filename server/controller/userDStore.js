@@ -1,8 +1,9 @@
 // user.constroller.js
 
+// const gstore = require('gstore-node')();
 const User = require('../models/userDStore');
 
-const getUsers = (req, res, cb) => {
+const getUsers = (req, res) => {
   const pageCursor = req.query.cursor;
 
   User.list({ start: pageCursor })
@@ -14,7 +15,7 @@ const getUsers = (req, res, cb) => {
     // .catch((err) => cb(null, err));
 };
 
-const getUser = (req, res, cb) => {
+const getUser = (req, res) => {
   const userId = +req.params.userId;
   User.get(userId)
     .then((entity) => {
@@ -38,7 +39,7 @@ const getUserDStore = (userId, req, res, cb) => {
     .catch((err) => cb(null, err));
 };
 
-const createUser = (req, res, cb) => {
+const createUser = (req, res) => {
   const entityData = User.sanitize(req.body);
   const user = new User(entityData);
 
@@ -49,12 +50,11 @@ const createUser = (req, res, cb) => {
     .catch((err) => {
       // If there are any validation error on the schema
       // they will be in this error object
-      // cb(null, err);
       res.status(400).json(err);
     });
 };
 
-const updateUser = (req, res, cb) => {
+const updateUser = (req, res) => {
   const userId = +req.params.userId;
   const entityData = User.sanitize(req.body); // { email: 'john@snow.com' }
 
@@ -64,25 +64,21 @@ const updateUser = (req, res, cb) => {
   User.update(userId, entityData)
     .then((entity) => {
       res.json(entity.plain());
-      // cb(entity.plain());
     })
     .catch((err) => {
       // If there are any validation error on the schema
       // they will be in this error object
-      // cb(null, err);
       res.status(400).json(err);
     });
 };
 
-const deleteUser = (req, res, cb) => {
+const deleteUser = (req, res) => {
   const userId = +req.params.userId;
   User.delete(userId)
     .then((response) => {
       res.json(response);
-      // cb(response.mutationResults);
     })
     .catch((err) => res.status(400).json(err));
-    // .catch((err) => cb(null, err));
 };
 
 module.exports = {
