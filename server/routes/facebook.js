@@ -30,7 +30,7 @@ router.get('/auth/callback', passport.authenticate('facebook', {
   const expiresIn = 60 * 60 * 24 * 180; // 180 days
   console.log('req.user', req.user);
   const payload = {
-    sub: req.user._id, // eslint-disable-line no-underscore-dangle
+    sub: req.user.entityKey.id, // eslint-disable-line no-underscore-dangle
   };
   const token = jwt.sign(payload, secret, { expiresIn });
   console.log('facebook callback', token);

@@ -9,12 +9,17 @@ const { Schema } = gstore;
  * Create the schema for the User Model
 */
 const userSchema = new Schema({
-  firstname: { type: 'string', required: true },
-  lastname: { type: 'string', required: true },
+  name: { type: 'string' },
   email: { type: 'string', validate: 'isEmail', required: true },
-  password: { type: 'string', read: false, required: true },
-  password2: { type: 'string', read: false, required: true },
+  password: { type: 'string', read: false },
+  password2: { type: 'string', read: false },
   createdOn: { type: 'string', default: gstore.defaultValues.NOW, write: false, read: false },
+  facebook: { type: 'object' },
+  //   id: { type: 'string'},
+  //   token: { type: 'string'},
+  //   accessToken: { type: 'string'},
+  //   refreshToken: { type: 'string'},
+  // },
 });
 
 /**
@@ -41,7 +46,7 @@ userSchema.methods.comparePassword = function comparePassword(password, callback
 */
 function hashPassword() {
     // scope *this* is the entity instance
-  const _this = this;
+  const self = this;
   const password = this.password;
 
   if (!password) {
@@ -49,22 +54,23 @@ function hashPassword() {
   }
 
   return new Promise((resolve, reject) => {
-    bcrypt.genSalt(5, function onSalt(err, salt) {
+    bcrypt.genSalt(5, (err, salt) => {
       if (err) {
         return reject(err);
       }
 
-      bcrypt.hash(password, salt, null, function onHash(err, hash) {
-        if (err) {
+      bcrypt.hash(password, salt, null, (hashErr, hash) => {
+        if (hashErr) {
           // reject will *not* save the entity
-          return reject(err);
+          return reject(hashErr);
         }
 
-        _this.password = hash;
+        self.password = hash;
 
         // resolve to go to next middleware or save method
         return resolve();
       });
+      return this;
     });
   });
 }

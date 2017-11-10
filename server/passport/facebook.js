@@ -15,7 +15,7 @@
 /* eslint no-param-reassign: 0 */
 
 const FacebookStrategy = require('passport-facebook').Strategy;
-const User = require('mongoose').model('User');
+const User = require('../models/userDStore');
 const config = require('../../SECRET');
 
 
@@ -44,12 +44,15 @@ module.exports = new FacebookStrategy({
       // Sign in with that account or delete it, then link it with your current account.
       user.facebook.accessToken = accessToken;
       user.facebook.refreshToken = refreshToken;
-      user.save((errUpdate, userUpdate) => {
-        console.log('============updated User', userUpdate);
-        done(null, userUpdate);
+      user.name = profile.displayName;
+      user.save().then((updatedUser) => {
+        console.log('============updated User', updatedUser);
+        done(null, updatedUser);
+      }).catch((updateErr) => {
+        done(updateErr);
       });
     } else {
-      const u = new User({
+      new User({
         facebook: {
           id: profile.id,
           accessToken,
@@ -57,10 +60,15 @@ module.exports = new FacebookStrategy({
         },
         email: profile._json.email, // eslint-disable-line no-underscore-dangle
         name: profile.displayName,
-      });
-      u.save((e, createdUser) => {
-        done(null, createdUser);
-      });
+      }).save()
+        .then((createdUser) => {
+          done(null, createdUser.plain());
+        })
+        .catch((createErr) => {
+          // If there are any validation error on the schema
+          // they will be in this error object
+          done(createErr);
+        });
     }
   });
 });
