@@ -29,16 +29,16 @@ function todoReducer(state = initialState, action) {
     case GET_TODO_FAIL:
       return state.set('error', action.payload);
     case GET_TODO_SUCCESS:
-      return fromJS(arrayToMap(action.payload, '_id'));
+      return fromJS(arrayToMap(action.payload, 'id'));
     // ************************************
     // ADD ToDo
     // ************************************
     case ADD_TODO_FAIL:
       return state.set('error', action.payload);
     case ADD_TODO_SUCCESS: {
-      const { _id } = action.payload;
+      const { id } = action.payload;
       return state
-        .mergeIn([_id], action.payload);
+        .mergeIn([id], action.payload);
     }
 
     // ************************************
@@ -47,9 +47,9 @@ function todoReducer(state = initialState, action) {
     case UPDATE_TODO_FAIL:
       return state.set('error', action.payload);
     case UPDATE_TODO_SUCCESS: {
-      const { _id, ...params } = action.payload;
+      const { id, ...params } = action.payload;
       return state
-        .mergeIn([_id], params);
+        .mergeIn([id], params);
     }
 
     // ************************************

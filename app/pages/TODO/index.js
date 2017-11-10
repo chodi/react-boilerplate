@@ -87,9 +87,9 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
               {
                 this.props.isLoading ?
                   <LoadingIndicator /> :
-                  <ul>{todos && todos.map((todo) => {
-                    return (
-                      <li key={todo.get('_id')} style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
+                  <ul>{
+                    todos && todos.map((todo) => (
+                      <li key={todo.get('id')} style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
                         <div>
                           <Button
                             type={todo.get('isCompleted') ? 'default' : 'primary'}
@@ -110,8 +110,8 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
                         </div>
                         <div>{todo.get('todo')}</div>
                       </li>
-                    );
-                  })}</ul>
+                    ))
+                  }</ul>
               }
             </div>
           </Content>
@@ -132,7 +132,7 @@ Todo.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGetTodo: () => dispatch(getTodo()),
+    onGetTodo: (id) => dispatch(getTodo(id)),
     onAddTodo: (payload) => dispatch(addTodo(payload)),
     onUpdateTodo: (payload) => dispatch(updateTodo(payload)),
     onDeleteTodo: (payload) => dispatch(deleteTodo(payload)),

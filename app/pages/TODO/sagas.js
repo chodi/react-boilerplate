@@ -28,9 +28,8 @@ const getTodosApi = createGetTodosApi(stateName);
 const updateTodosApi = createUpdateTodosApi(stateName);
 const deleteTodosApi = createDeleteTodosApi(stateName);
 
-export function* getTodoSaga() {
-  const username = window.USER.name;
-  const { result, error } = yield call(getTodosApi, username);
+export function* getTodoSaga({ payload }) {
+  const { result, error } = yield call(getTodosApi, payload);
   if (result) {
     yield put(getTodoSuccess(result));
   } else {
@@ -68,8 +67,8 @@ export function* updateTodoSaga({ payload }) {
  * delete Todo
  */
 export function* deleteTodoSaga({ payload }) {
-  const { _id } = payload;
-  const { result, error } = yield call(deleteTodosApi, _id);
+  const { id } = payload;
+  const { result, error } = yield call(deleteTodosApi, id);
   if (result) {
     yield put(deleteTodoSuccess(result));
   } else {

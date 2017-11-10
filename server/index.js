@@ -1,18 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const logger = require('./logger');
 const bodyParser = require('body-parser');
 const path = require('path');
-const restify = require('express-restify-mongoose');
 const passport = require('passport');
+const secret = require('../SECRET');
 
-// connect to the database and load models
-require('./models').connect(mongoose);
-// Overwrite the Promise method of mongoose
-mongoose.Promise = Promise;
-// Model for CRUD RESTIFY
-const Todo = require('./models/todos')(mongoose);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
@@ -20,18 +13,13 @@ const authCheckMiddleware = require('./middleware/auth-check');
 const cookieParser = require('cookie-parser');
 const app = express();
 
-// *************************************
-//    PUT YOUR OWN VALUES HERE
-// *************************************
-const secret = require('../SECRET');
-
-// *****************************
 const gstore = require('gstore-node')();
 const datastore = require('@google-cloud/datastore')({
   projectId: secret.datastore.projectId,
   keyFilename: path.join(__dirname, secret.datastore.file),
 });
 require('./models/userDStore');
+require('./models/todoDStore');
 gstore.connect(datastore);
 
 
@@ -41,10 +29,6 @@ app.use(cookieParser());
 // tell the app to parse HTTP body messages
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// Required for RESTIFY
-const router = express.Router();
-restify.serve(router, Todo, { preMiddleware: authCheckMiddleware });
 
 // Express session
 // app.use(session({ secret: 'secrets', resave: true, saveUninitialized: true }))
@@ -75,21 +59,19 @@ app.use('/', authCheckMiddleware);
 // routes
 const index = require('./routes');
 const authRoutes = require('./routes/auth');
-// const apiRoutes = require('./routes/api');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
-const todo = require('./routes/todo');
+// const todo = require('./routes/todo');
 const facebook = require('./routes/facebook');
-
+const todoDStore = require('./routes/api/todo');
 
 app.use('/auth', authRoutes(passport));
-// app.use('/api', apiRoutes);
 app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
-app.use('/todo', todo);
+app.use('/api/todo', todoDStore);
+// app.use('/todo', todo);
 app.use('/facebook', facebook);
-app.use(router);
 
 const argv = require('./argv');
 const port = require('./port');

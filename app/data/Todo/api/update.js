@@ -11,12 +11,12 @@ import {
 
 function* updateTodosSaga(data, actions) {
   const { fnFire, fnSuccess, fnFail } = actions;
-  const { _id, ...params } = data;
+  const { id, ...params } = data;
   yield put(fnFire(data));
   const {
     result,
     error,
-  } = yield apiRequestSaga(updateTodo, _id, params);
+  } = yield apiRequestSaga(updateTodo, id, params);
   if (result) {
     yield put(fnSuccess(result));
   } else if (error) {
