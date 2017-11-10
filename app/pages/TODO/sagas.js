@@ -68,8 +68,8 @@ export function* updateTodoSaga({ payload }) {
  * delete Todo
  */
 export function* deleteTodoSaga({ payload }) {
-  const { _id } = payload;
-  const { result, error } = yield call(deleteTodosApi, _id);
+  const { id } = payload;
+  const { result, error } = yield call(deleteTodosApi, id);
   if (result) {
     yield put(deleteTodoSuccess(result));
   } else {

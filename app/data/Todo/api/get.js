@@ -15,7 +15,8 @@ function* getTodosSaga(id, actions) {
   const {
     result,
     error,
-  } = yield apiRequestSaga(getTodo, { query: `{"owner":"${id}"}` });
+  } = yield apiRequestSaga(getTodo, { owner: id });
+  // } = yield apiRequestSaga(getTodo, { query: `{"owner":"${id}"}` });
   if (result) {
     yield put(fnSuccess(result));
   } else if (error) {

@@ -6,7 +6,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
 const restify = require('express-restify-mongoose');
-const secret = require('../SECRET').secretkey;
+const secret = require('../SECRET');
 const jwt = require('jsonwebtoken');
 
 // connect to the database and load models
@@ -25,7 +25,6 @@ const app = express();
 // *************************************
 //    PUT YOUR OWN VALUES HERE
 // *************************************
-const secret = require('../SECRET');
 const PROJECT_ID = secret.projectId;
 const FILENAME = secret.filename;
 
@@ -36,6 +35,7 @@ const datastore = require('@google-cloud/datastore')({
   keyFilename: path.join(__dirname, FILENAME),
 });
 require('./models/userDStore');
+require('./models/todoDStore');
 gstore.connect(datastore);
 
 
@@ -84,6 +84,7 @@ const authRoutes = require('./routes/auth');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const todo = require('./routes/todo');
+const todoDStore = require('./routes/api/todo');
 
 app.get('/login/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false }));
 
@@ -96,7 +97,7 @@ app.get('/login/facebook/return', passport.authenticate('facebook', {
   const payload = {
     sub: req.user._id, // eslint-disable-line no-underscore-dangle
   };
-  const token = jwt.sign(payload, secret, { expiresIn });
+  const token = jwt.sign(payload, secret.secretkey, { expiresIn });
   console.log('facebook callback', token);
   res.cookie('userToken', token, { maxAge: 1000 * expiresIn, httpOnly: true });
   res.redirect('/');
@@ -108,6 +109,7 @@ app.use('/auth', authRoutes(passport));
 app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
+app.use('/api/todo', todoDStore);
 app.use('/todo', todo);
 app.use(router);
 

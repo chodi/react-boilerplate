@@ -89,7 +89,7 @@ export class Todo extends React.PureComponent { // eslint-disable-line react
                   <LoadingIndicator /> :
                   <ul>{todos && todos.map((todo) => {
                     return (
-                      <li key={todo.get('_id')} style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
+                      <li key={todo.get('id')} style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
                         <div>
                           <Button
                             type={todo.get('isCompleted') ? 'default' : 'primary'}
