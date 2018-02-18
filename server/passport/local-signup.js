@@ -1,5 +1,5 @@
 const PassportLocalStrategy = require('passport-local').Strategy;
-const User = require('../models/userDStore');
+const User = require('mongoose').model('User');
 
 
 /**
@@ -17,9 +17,10 @@ module.exports = new PassportLocalStrategy({
     name: `${req.body.firstname.trim()} ${req.body.lastname.trim()}`,
     password2: req.body.password2.trim(),
   };
-  const entityData = User.sanitize(userData);
-  const newUser = new User(entityData);
-  newUser.save()
-    .then((entity) => done(null, entity.plain()))
-    .catch((err) => done(err));
+  const newUser = new User(userData);
+  newUser.save((err) => {
+    if (err) { return done(err); }
+    return done(null);
+  });
 });
+

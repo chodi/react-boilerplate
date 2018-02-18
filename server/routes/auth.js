@@ -102,7 +102,7 @@ module.exports = (passport) => {
             },
           });
         }
-
+        console.log('err-form', err)
         return res.status(400).json({
           success: false,
           message: 'Could not process the form.',

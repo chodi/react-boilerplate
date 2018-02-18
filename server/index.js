@@ -4,24 +4,14 @@ const logger = require('./logger');
 const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
-const secret = require('../SECRET');
-
+const mongoose = require('mongoose');
+require('./models').connect(mongoose);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 
 const cookieParser = require('cookie-parser');
 const app = express();
-
-const gstore = require('gstore-node')();
-const datastore = require('@google-cloud/datastore')({
-  projectId: secret.datastore.projectId,
-  keyFilename: path.join(__dirname, secret.datastore.file),
-});
-require('./models/userDStore');
-require('./models/todoDStore');
-gstore.connect(datastore);
-
 
 // need cookieParser middleware before we can do anything with cookies
 app.use(cookieParser());
@@ -38,11 +28,11 @@ app.use(passport.session());
 // load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
 const localLoginStrategy = require('./passport/local-login');
-const facebookStrategy = require('./passport/facebook');
+// const facebookStrategy = require('./passport/facebook');
 
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
-passport.use('facebook', facebookStrategy);
+// passport.use('facebook', facebookStrategy);
 
 // View engine
 app.engine('handlebars', exphbs());
@@ -62,7 +52,7 @@ const authRoutes = require('./routes/auth');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 // const todo = require('./routes/todo');
-const facebook = require('./routes/facebook');
+// const facebook = require('./routes/facebook');
 const todoDStore = require('./routes/api/todo');
 
 app.use('/auth', authRoutes(passport));
@@ -71,7 +61,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/api/todo', todoDStore);
 // app.use('/todo', todo);
-app.use('/facebook', facebook);
+// app.use('/facebook', facebook);
 
 const argv = require('./argv');
 const port = require('./port');

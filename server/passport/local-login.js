@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-const UserDStore = require('../models/userDStore');
+// const UserDStore = require('../models/userDStore');
 const User = require('mongoose').model('User');
+
 const isDev = process.env.NODE_ENV !== 'production';
 const secret = isDev ? require('../../SECRET').secretkey : '';
 const thisisacomplexkeyword = secret || process.env.COMPLEX_HASH_LETTERS;
@@ -21,8 +22,8 @@ module.exports = new PassportLocalStrategy({
     password: password.trim(),
   };
   // find a user by email address
-  // return User.findOne({ email: userData.email }, (err, user) => {
-  return UserDStore.findOne({ email: userData.email }, (err, user) => {
+  return User.findOne({ email: userData.email }, (err, user) => {
+  // return UserDStore.findOne({ email: userData.email }, (err, user) => {
     if (err) { return done(err); }
     if (!user) {
       const error = new Error('Incorrect email or password');
@@ -43,12 +44,12 @@ module.exports = new PassportLocalStrategy({
       }
 
       const payload = {
-        sub: user.entityKey.id,
+        sub: user._id, // eslint-disable-line no-underscore-dangle
       };
       // create a token string
       const token = jwt.sign(payload, thisisacomplexkeyword);
       const data = {
-        name: `${user.entityData.firstname} ${user.entityData.lastname}`,
+        name: `${user.firstname} ${user.lastname}`,
         email: userData.email,
       };
 
