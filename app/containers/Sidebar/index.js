@@ -54,12 +54,14 @@ class SideBar extends React.Component {
                 <span>Home</span>
               </Link>
             </MITEM>
-            <MITEM key="MyTodos">
-              <Link style={{ color: '#fff' }} to="/mytodos">
-                <Icon type="check-circle-o" />
-                <span>My Todos</span>
-              </Link>
-            </MITEM>
+            {
+              // <MITEM key="MyTodos">
+              //   <Link style={{ color: '#fff' }} to="/mytodos">
+              //     <Icon type="check-circle-o" />
+              //     <span>My Todos</span>
+              //   </Link>
+              // </MITEM>
+            }
             <MITEM key="Settings">
               <Link style={{ color: '#fff' }} to="/settings">
                 <Icon type="setting" />

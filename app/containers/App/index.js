@@ -9,11 +9,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import NotFoundPage from 'pages/NotFoundPage/Loadable';
+// import NotFoundPage from 'pages/NotFoundPage/Loadable';
 import Content from 'containers/Content';
 import Home from 'pages/Home';
 import Settings from 'pages/Settings';
-import TODO from 'pages/TODO';
+// import TODO from 'pages/TODO';
 import Sidebar from 'containers/Sidebar';
 
 const ContentWrapper = styled.div`
@@ -38,7 +38,9 @@ export default function App(props) {
       <ContentWrapper>
         <Content>
           <Switch>
-            <Route path="/mytodos" component={TODO} />
+            {
+              // <Route path="/mytodos" component={TODO} />
+            }
             <Route path="/settings" component={Settings} />
             <Route path="/home" component={Home} />
             <Redirect push from="*" to="/home" />
